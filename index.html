@@ -1,0 +1,2248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paddock Route — Farm to Door, Anywhere in Australia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Syne:wght@400;500;700;800&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #0F1A0A;
+    --dark:   #1A2912;
+    --grove:  #2D4A20;
+    --field:  #4E7A35;
+    --lime:   #8DBD5A;
+    --straw:  #D4B96A;
+    --wheat:  #E8D49A;
+    --parch:  #F5EDD8;
+    --cream:  #FDFAF3;
+    --stone:  #7A7468;
+    --mist:   #C4D4BA;
+    --rust:   #B85A2A;
+    --bg:     #F0E8D0;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 5vw;
+    transition: all 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(253,250,243,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(78,122,53,0.12);
+    padding: 16px 5vw;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700;
+    color: var(--cream); transition: color 0.4s; letter-spacing: -0.01em;
+  }
+  nav.scrolled .nav-logo { color: var(--ink); }
+  nav.scrolled .nav-logo .paddock-word { color: var(--ink) !important; }
+  nav.scrolled .nav-logo .route-word { color: var(--field) !important; }
+  .logo-mark {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--lime); display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0; transition: background 0.3s;
+  }
+  nav.scrolled .logo-mark { background: var(--field); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(253,250,243,0.65); text-decoration: none; transition: color 0.25s;
+  }
+  nav.scrolled .nav-links a { color: var(--stone); }
+  .nav-links a:hover { color: var(--lime); }
+  nav.scrolled .nav-links a:hover { color: var(--field); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .nav-driver {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 8px 16px; border: 1px solid rgba(253,250,243,0.3);
+    color: rgba(253,250,243,0.7); text-decoration: none; border-radius: 2px;
+    transition: all 0.25s;
+  }
+  nav.scrolled .nav-driver { border-color: rgba(78,122,53,0.35); color: var(--field); }
+  .nav-driver:hover { border-color: var(--lime); color: var(--lime); background: rgba(141,189,90,0.06); }
+  nav.scrolled .nav-driver:hover { border-color: var(--field); color: var(--field); background: rgba(78,122,53,0.06); }
+  .nav-cta {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 8px 18px; background: var(--lime); border: none; color: var(--ink);
+    border-radius: 2px; text-decoration: none; cursor: pointer; transition: all 0.25s;
+  }
+  .nav-cta:hover { background: var(--wheat); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 5vw 100px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 75% 40%, rgba(78,122,53,0.35) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 60% at 20% 70%, rgba(15,26,10,0.8) 0%, transparent 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+    background-image: linear-gradient(rgba(141,189,90,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(141,189,90,1) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 720px; }
+  .hero-kicker {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--lime); margin-bottom: 32px;
+    opacity: 0; animation: fadeup 0.8s 0.1s forwards;
+  }
+  .kicker-pip { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(56px, 8vw, 110px);
+    font-weight: 900; line-height: 0.9; letter-spacing: -0.02em;
+    color: var(--cream); margin-bottom: 12px;
+    opacity: 0; animation: fadeup 0.8s 0.25s forwards;
+  }
+  h1 em { font-style: italic; color: var(--lime); }
+  .hero-sub-head {
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: clamp(24px, 3vw, 42px); font-weight: 400;
+    color: rgba(253,250,243,0.35); line-height: 1.1; margin-bottom: 36px;
+    opacity: 0; animation: fadeup 0.8s 0.35s forwards;
+  }
+  .hero-body {
+    font-size: clamp(14px, 1.4vw, 16px); font-weight: 400; line-height: 1.8;
+    color: rgba(253,250,243,0.55); max-width: 460px; margin-bottom: 48px;
+    opacity: 0; animation: fadeup 0.8s 0.45s forwards;
+  }
+  .hero-btns {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    opacity: 0; animation: fadeup 0.8s 0.55s forwards;
+  }
+  .btn-primary {
+    padding: 16px 36px; background: var(--lime); color: var(--ink);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px; border: none; cursor: pointer;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--wheat); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+  .btn-ghost {
+    padding: 16px 36px; background: transparent; color: rgba(253,250,243,0.7);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px; cursor: pointer;
+    border: 1px solid rgba(253,250,243,0.2); transition: all 0.25s;
+  }
+  .btn-ghost:hover { border-color: var(--lime); color: var(--lime); }
+
+  .hero-stats {
+    position: absolute; bottom: 60px; right: 5vw; z-index: 2;
+    display: flex; gap: 32px;
+    opacity: 0; animation: fadeup 0.8s 0.7s forwards;
+  }
+  .hero-stat { text-align: right; }
+  .hero-stat-n {
+    font-family: 'Fraunces', serif; font-size: 36px; font-weight: 700;
+    color: var(--lime); line-height: 1;
+  }
+  .hero-stat-l { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(253,250,243,0.3); margin-top: 4px; }
+
+  /* ── TICKER ── */
+  .ticker { background: var(--lime); padding: 14px 0; overflow: hidden; }
+  .ticker-track { display: flex; white-space: nowrap; animation: ticker 30s linear infinite; }
+  .ticker-item {
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: 14px; color: var(--ink); padding: 0 32px; flex-shrink: 0;
+  }
+  @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 5vw; }
+  .eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--field); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ''; display: block; width: 20px; height: 1px; background: var(--field); }
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 4vw, 56px); font-weight: 700; line-height: 1.05;
+    color: var(--ink); margin-bottom: 56px;
+  }
+  h2 em { font-style: italic; color: var(--field); }
+
+  /* ── HOW IT WORKS ── */
+  #how { background: var(--parch); }
+  .steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; border: 1px solid rgba(78,122,53,0.15);
+  }
+  @media (max-width: 860px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    padding: 44px 32px; position: relative; overflow: hidden;
+    border-right: 1px solid rgba(78,122,53,0.12); background: var(--cream);
+    transition: background 0.3s;
+  }
+  .step:last-child { border-right: none; }
+  .step:hover { background: var(--parch); }
+  .step-n {
+    font-family: 'Fraunces', serif; font-size: 80px; font-weight: 900;
+    color: rgba(78,122,53,0.07); line-height: 1;
+    position: absolute; top: 8px; right: 12px;
+  }
+  .step-icon { font-size: 24px; margin-bottom: 20px; display: block; }
+  .step h3 { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 700; margin-bottom: 10px; color: var(--ink); }
+  .step p { font-size: 13px; font-weight: 400; line-height: 1.75; color: var(--stone); }
+
+  /* ── NATIONAL SECTION ── */
+  #national { background: var(--dark); overflow: hidden; position: relative; }
+  #national::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(78,122,53,0.25) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .national-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  @media (max-width: 800px) { .national-inner { grid-template-columns: 1fr; } }
+  #national .eyebrow { color: var(--lime); }
+  #national .eyebrow::before { background: var(--lime); }
+  #national h2 { color: var(--cream); margin-bottom: 24px; }
+  #national h2 em { color: var(--lime); }
+  .national-body { font-size: 15px; font-weight: 400; line-height: 1.8; color: rgba(253,250,243,0.5); margin-bottom: 40px; }
+  .phase-list { display: flex; flex-direction: column; gap: 0; }
+  .phase {
+    display: flex; gap: 20px; padding: 20px 0;
+    border-bottom: 1px solid rgba(141,189,90,0.1);
+    align-items: flex-start;
+  }
+  .phase:last-child { border-bottom: none; }
+  .phase-num {
+    font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700;
+    color: var(--lime); line-height: 1; flex-shrink: 0; width: 36px;
+  }
+  .phase-content {}
+  .phase-title { font-size: 14px; font-weight: 700; letter-spacing: 0.05em; color: var(--cream); margin-bottom: 4px; }
+  .phase-desc { font-size: 12px; font-weight: 400; color: rgba(253,250,243,0.4); line-height: 1.6; }
+
+  /* ── COVERAGE MAP — South East Queensland ── */
+  .seq-map-wrap {
+    position: relative;
+    background: linear-gradient(180deg, rgba(15,26,10,0.5) 0%, rgba(78,122,53,0.06) 100%);
+    border: 1px solid rgba(141,189,90,0.18);
+    border-radius: 4px;
+    padding: 24px 24px 20px;
+  }
+  .seq-map-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px; gap: 12px; flex-wrap: wrap;
+  }
+  .seq-map-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--lime); display: flex; align-items: center; gap: 8px;
+  }
+  .seq-map-label::before { content: ''; display: block; width: 16px; height: 1px; background: var(--lime); }
+  .seq-map-meta {
+    font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(196,212,186,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  .seq-map {
+    width: 100%; aspect-ratio: 6/5; position: relative;
+    background: rgba(15,26,10,0.4); border-radius: 3px; overflow: hidden;
+  }
+
+  /* Region status dots */
+  .region-dot {
+    position: absolute; width: 11px; height: 11px; border-radius: 50%;
+    transform: translate(-50%, -50%); transition: all 0.25s;
+    cursor: pointer; z-index: 4;
+  }
+  .region-dot.live {
+    background: var(--lime); border: 2px solid var(--cream);
+    box-shadow: 0 0 0 5px rgba(141,189,90,0.18), 0 0 18px rgba(141,189,90,0.5);
+  }
+  .region-dot.live::after {
+    content: ''; position: absolute; inset: -8px;
+    border: 1px solid var(--lime); border-radius: 50%;
+    opacity: 0.5; animation: pulse-ring 2.6s ease-out infinite;
+  }
+  @keyframes pulse-ring {
+    0%   { transform: scale(0.7); opacity: 0.6; }
+    80%  { transform: scale(2.2); opacity: 0; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
+  .region-dot.activating {
+    background: var(--straw); border: 2px solid rgba(232,212,154,0.8);
+    box-shadow: 0 0 0 4px rgba(212,185,106,0.2);
+  }
+  .region-dot.queue {
+    background: rgba(141,189,90,0.15); border: 1.5px solid rgba(141,189,90,0.5);
+  }
+  .region-dot:hover { transform: translate(-50%, -50%) scale(1.3); z-index: 10; }
+
+  /* City dots — smaller, neutral */
+  .city-dot {
+    position: absolute; width: 4px; height: 4px; border-radius: 50%;
+    background: rgba(196,212,186,0.55);
+    transform: translate(-50%, -50%); z-index: 3;
+  }
+  .city-label {
+    position: absolute; font-family: 'Syne', sans-serif;
+    font-size: 9px; font-weight: 600; letter-spacing: 0.04em;
+    color: rgba(196,212,186,0.55); white-space: nowrap;
+    transform: translate(8px, -50%); z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Region labels */
+  .region-label {
+    position: absolute; font-family: 'Syne', sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    white-space: nowrap; transform: translate(14px, -50%);
+    z-index: 5; pointer-events: none;
+  }
+  .region-label.live { color: var(--lime); }
+  .region-label.activating { color: var(--straw); }
+  .region-label.queue { color: rgba(196,212,186,0.45); }
+  .region-label.left  { transform: translate(calc(-100% - 14px), -50%); }
+  .region-label.below { transform: translate(-50%, 14px); }
+  .region-label .lbl-meta {
+    display: block; font-size: 8px; font-weight: 500;
+    color: rgba(196,212,186,0.4); letter-spacing: 0.04em;
+    margin-top: 1px; text-transform: uppercase;
+  }
+  /* Mobile: tighten map labels so they don't overlap on narrow widths */
+  @media (max-width: 640px) {
+    .region-label { font-size: 9px; letter-spacing: 0.02em; transform: translate(10px, -50%); }
+    .region-label.left  { transform: translate(calc(-100% - 10px), -50%); }
+    .region-label.below { transform: translate(-50%, 10px); }
+    .region-label .lbl-meta { display: none; }
+    .city-label { font-size: 8px; }
+    .city-label.hide-mobile { display: none; }
+    .geo-label { display: none; }
+    .border-label { font-size: 7px; }
+  }
+
+  /* Geographic labels (Pacific Ocean, NSW, etc.) */
+  .geo-label {
+    position: absolute; font-family: 'Fraunces', serif; font-style: italic;
+    font-size: 13px; color: rgba(196,212,186,0.18);
+    white-space: nowrap; pointer-events: none; letter-spacing: 0.02em; z-index: 2;
+  }
+  .geo-label.small { font-size: 10px; font-weight: 500; }
+  .border-label {
+    position: absolute; font-family: 'DM Mono', monospace; font-size: 9px;
+    color: rgba(196,212,186,0.3); letter-spacing: 0.15em;
+    white-space: nowrap; transform: translate(-50%, -50%); z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Compass */
+  .map-compass {
+    position: absolute; top: 12px; right: 12px;
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(141,189,90,0.25);
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(15,26,10,0.5); z-index: 6;
+  }
+  .compass-n {
+    font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 700;
+    color: var(--lime);
+  }
+  .compass-arrow {
+    position: absolute; top: 1px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 0; border-left: 3px solid transparent;
+    border-right: 3px solid transparent; border-bottom: 6px solid var(--lime);
+  }
+
+  /* Scale bar */
+  .map-scale {
+    position: absolute; bottom: 10px; left: 12px;
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    color: rgba(196,212,186,0.4); display: flex; align-items: center; gap: 8px;
+    z-index: 6;
+  }
+  .scale-bar {
+    width: 60px; height: 6px; position: relative;
+    border-left: 1px solid rgba(196,212,186,0.4);
+    border-right: 1px solid rgba(196,212,186,0.4);
+  }
+  .scale-bar::before {
+    content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+    background: rgba(196,212,186,0.4);
+  }
+
+  /* Legend */
+  .seq-legend {
+    display: flex; gap: 18px; margin-top: 16px; padding-top: 14px;
+    border-top: 1px solid rgba(141,189,90,0.12); flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500; color: rgba(253,250,243,0.45);
+  }
+  .l-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .l-dot.live       { background: var(--lime); box-shadow: 0 0 0 3px rgba(141,189,90,0.2); }
+  .l-dot.activating { background: var(--straw); }
+  .l-dot.queue      { background: rgba(141,189,90,0.15); border: 1px solid rgba(141,189,90,0.5); }
+
+  /* Detail panels below map */
+  .seq-details {
+    margin-top: 16px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  @media (max-width: 540px) { .seq-details { grid-template-columns: 1fr; } }
+  .seq-detail-card {
+    background: rgba(15,26,10,0.4); border: 1px solid rgba(141,189,90,0.12);
+    border-radius: 3px; padding: 14px 16px;
+  }
+  .seq-detail-card.featured {
+    background: linear-gradient(180deg, rgba(141,189,90,0.08) 0%, rgba(15,26,10,0.4) 100%);
+    border-color: rgba(141,189,90,0.3);
+  }
+  .seq-detail-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; padding: 3px 8px;
+    border-radius: 1px; margin-bottom: 8px;
+  }
+  .seq-detail-tag.live       { background: rgba(141,189,90,0.18); color: var(--lime); }
+  .seq-detail-tag.activating { background: rgba(212,185,106,0.18); color: var(--straw); }
+  .seq-detail-name {
+    font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700;
+    color: var(--cream); margin-bottom: 4px;
+  }
+  .seq-detail-meta {
+    font-size: 11px; color: rgba(196,212,186,0.5); line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .seq-detail-list {
+    display: flex; flex-wrap: wrap; gap: 4px 6px; margin-bottom: 10px;
+  }
+  .seq-town-chip {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.05em;
+    padding: 3px 7px; background: rgba(141,189,90,0.08);
+    border: 1px solid rgba(141,189,90,0.18);
+    color: rgba(253,250,243,0.55); border-radius: 1px;
+  }
+  .seq-stats-row {
+    display: flex; gap: 14px; padding-top: 10px;
+    border-top: 1px solid rgba(141,189,90,0.1);
+  }
+  .seq-stat-block {}
+  .seq-stat-num {
+    font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700;
+    color: var(--lime); line-height: 1;
+  }
+  .seq-stat-label {
+    font-size: 9px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: rgba(196,212,186,0.4);
+    margin-top: 3px;
+  }
+
+  /* Activation progress for activating regions */
+  .seq-activation {
+    margin-top: 8px;
+  }
+  .seq-act-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 5px; font-size: 10px;
+  }
+  .seq-act-label { color: rgba(196,212,186,0.5); }
+  .seq-act-val { font-family: 'DM Mono', monospace; color: var(--straw); font-weight: 600; }
+  .seq-progress {
+    height: 3px; background: rgba(141,189,90,0.12);
+    border-radius: 99px; overflow: hidden;
+  }
+  .seq-progress-fill {
+    height: 100%; background: var(--straw); border-radius: 99px;
+    transition: width 0.6s ease;
+  }
+
+  /* ── DRIVER SECTION ── */
+  #drivers { background: var(--grove); position: relative; overflow: hidden; }
+  #drivers::after {
+    content: 'DRIVE'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+    font-family: 'Fraunces', serif; font-size: 200px; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; white-space: nowrap;
+  }
+  .driver-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; position: relative; z-index: 1; }
+  @media (max-width: 800px) { .driver-inner { grid-template-columns: 1fr; } }
+  #drivers .eyebrow { color: var(--mist); }
+  #drivers .eyebrow::before { background: var(--mist); }
+  #drivers h2 { color: var(--cream); margin-bottom: 24px; }
+  #drivers h2 em { color: var(--straw); }
+  .driver-body { font-size: 15px; line-height: 1.8; color: rgba(253,250,243,0.55); margin-bottom: 40px; }
+  .perks { display: flex; flex-direction: column; gap: 0; }
+  .perk { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(253,250,243,0.08); align-items: flex-start; }
+  .perk:last-child { border-bottom: none; }
+  .perk-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .perk-title { font-size: 14px; font-weight: 700; color: var(--cream); margin-bottom: 3px; }
+  .perk-desc { font-size: 12px; color: rgba(253,250,243,0.45); line-height: 1.6; }
+
+  .driver-form-wrap {
+    background: rgba(253,250,243,0.05); border: 1px solid rgba(253,250,243,0.1);
+    padding: 36px;
+  }
+  .driver-form-title {
+    font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700;
+    color: var(--cream); margin-bottom: 6px;
+  }
+  .driver-form-sub { font-size: 13px; color: rgba(253,250,243,0.4); margin-bottom: 28px; line-height: 1.5; }
+  .form-group { margin-bottom: 16px; }
+  .form-label {
+    display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: rgba(253,250,243,0.4); margin-bottom: 8px;
+  }
+  .form-input {
+    width: 100%; padding: 13px 16px;
+    background: rgba(253,250,243,0.06); border: 1px solid rgba(253,250,243,0.12);
+    color: var(--cream); font-size: 14px; font-family: 'Syne', sans-serif;
+    outline: none; border-radius: 2px; transition: all 0.25s;
+  }
+  .form-input::placeholder { color: rgba(253,250,243,0.2); }
+  .form-input:focus { border-color: var(--lime); background: rgba(141,189,90,0.06); }
+  .form-select {
+    width: 100%; padding: 13px 16px;
+    background: rgba(253,250,243,0.06); border: 1px solid rgba(253,250,243,0.12);
+    color: var(--cream); font-size: 14px; font-family: 'Syne', sans-serif;
+    outline: none; border-radius: 2px; cursor: pointer;
+    appearance: none; transition: all 0.25s;
+  }
+  .form-select option { background: var(--grove); color: var(--cream); }
+  .form-select:focus { border-color: var(--lime); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .driver-submit {
+    width: 100%; padding: 15px; background: var(--lime); color: var(--ink);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; border-radius: 2px; cursor: pointer; font-family: 'Syne', sans-serif;
+    margin-top: 8px; transition: all 0.25s;
+  }
+  .driver-submit:hover { background: var(--wheat); transform: translateY(-1px); }
+  .driver-note { font-size: 11px; color: rgba(253,250,243,0.25); text-align: center; margin-top: 12px; }
+  .area-status { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; margin-left: 8px; }
+  .area-active { background: rgba(141,189,90,0.15); color: var(--lime); }
+  .area-soon { background: rgba(212,185,106,0.15); color: var(--straw); }
+  .area-coming { background: rgba(122,116,104,0.2); color: var(--stone); }
+
+  /* ── BOXES ── */
+  #boxes { background: var(--bg); }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr; } }
+  .box-card {
+    background: var(--cream); border: 1px solid rgba(78,122,53,0.15);
+    padding: 36px 28px; transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .box-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--lime); transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .box-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(15,26,10,0.1); }
+  .box-card:hover::before { transform: scaleX(1); }
+  .box-card.feat { background: var(--dark); border-color: rgba(141,189,90,0.25); }
+  .box-badge {
+    display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; background: var(--lime); color: var(--ink);
+    padding: 4px 10px; margin-bottom: 20px; border-radius: 1px;
+  }
+  .box-size { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--field); margin-bottom: 6px; }
+  .box-card.feat .box-size { color: var(--mist); }
+  .box-name { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .box-card.feat .box-name { color: var(--cream); }
+  .box-for { font-size: 13px; color: var(--stone); margin-bottom: 24px; }
+  .box-card.feat .box-for { color: rgba(253,250,243,0.4); }
+  .box-price { font-family: 'Fraunces', serif; font-size: 44px; font-weight: 700; color: var(--ink); line-height: 1; }
+  .box-card.feat .box-price { color: var(--lime); }
+  .box-pw { font-size: 12px; color: var(--stone); margin-bottom: 24px; }
+  .box-card.feat .box-pw { color: rgba(253,250,243,0.4); }
+  .box-divider { height: 1px; background: rgba(78,122,53,0.12); margin-bottom: 20px; }
+  .box-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+  .box-list li { font-size: 13px; color: var(--stone); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .box-card.feat .box-list li { color: rgba(253,250,243,0.55); }
+  .box-list li::before { content: '↗'; color: var(--lime); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
+  .box-btn {
+    width: 100%; padding: 14px; border-radius: 2px; cursor: pointer;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    transition: all 0.25s; font-family: 'Syne', sans-serif;
+    background: transparent; color: var(--ink); border: 1px solid rgba(15,26,10,0.25);
+  }
+  .box-btn:hover { background: var(--field); border-color: var(--field); color: var(--cream); }
+  .box-card.feat .box-btn { background: var(--lime); border-color: var(--lime); color: var(--ink); }
+  .box-card.feat .box-btn:hover { background: var(--wheat); }
+
+  /* ── PROMISE ── */
+  #promise { background: var(--cream); }
+  .promise-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  @media (max-width: 760px) { .promise-grid { grid-template-columns: 1fr; } }
+  .feats { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 52px; }
+  @media (max-width: 540px) { .feats { grid-template-columns: 1fr; } }
+  .feat { border-top: 2px solid rgba(78,122,53,0.18); padding-top: 20px; }
+  .feat h3 { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .feat p { font-size: 13px; line-height: 1.75; color: var(--stone); }
+
+  /* ── SIGNUP ── */
+  #signup { background: var(--field); text-align: center; position: relative; overflow: hidden; }
+  #signup::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 50% 40%, rgba(141,189,90,0.2) 0%, transparent 65%);
+  }
+  .signup-inner { position: relative; z-index: 1; max-width: 540px; margin: 0 auto; }
+  .signup-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mist); margin-bottom: 16px; }
+  #signup h2 { color: var(--cream); margin-bottom: 16px; }
+  #signup h2 em { color: var(--straw); }
+  .signup-sub { font-size: 15px; line-height: 1.8; color: rgba(253,250,243,0.6); margin-bottom: 40px; }
+  .signup-form { display: flex; max-width: 440px; margin: 0 auto 16px; }
+  .signup-input {
+    flex: 1; padding: 15px 18px;
+    background: rgba(253,250,243,0.1); border: 1px solid rgba(253,250,243,0.2); border-right: none;
+    color: var(--cream); font-size: 14px; font-family: 'Syne', sans-serif;
+    outline: none; border-radius: 2px 0 0 2px; transition: all 0.25s;
+  }
+  .signup-input::placeholder { color: rgba(253,250,243,0.3); }
+  .signup-input:focus { border-color: var(--lime); background: rgba(253,250,243,0.14); }
+  .signup-btn {
+    padding: 15px 26px; background: var(--lime); color: var(--ink);
+    border: none; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; border-radius: 0 2px 2px 0; font-family: 'Syne', sans-serif; transition: background 0.25s;
+  }
+  .signup-btn:hover { background: var(--wheat); }
+  .signup-note { font-size: 12px; color: rgba(253,250,243,0.35); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--ink); padding: 60px 5vw 0; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 52px; padding-bottom: 52px; }
+  @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  .f-brand { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; color: var(--cream); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .f-tag { font-size: 13px; line-height: 1.65; color: rgba(253,250,243,0.3); max-width: 240px; }
+  .f-head { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lime); margin-bottom: 16px; }
+  .f-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .f-links a, .f-links .f-static { font-size: 13px; color: rgba(253,250,243,0.35); text-decoration: none; transition: color 0.2s; }
+  .f-links a:hover { color: var(--lime); }
+  .footer-bar { border-top: 1px solid rgba(253,250,243,0.06); padding: 20px 0 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .footer-bar p { font-size: 12px; color: rgba(253,250,243,0.18); }
+
+
+  /* ── MARKETPLACE ── */
+  #marketplace { background: var(--cream); }
+  .mkt-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 40px; flex-wrap: wrap; gap: 20px;
+  }
+  .mkt-intro { font-size: 14px; color: var(--stone); max-width: 360px; line-height: 1.75; }
+
+  /* Tab switcher: Boxes ↔ Marketplace */
+  .section-tabs {
+    display: flex; gap: 0; margin-bottom: 48px;
+    border: 1px solid rgba(78,122,53,0.2); border-radius: 3px; overflow: hidden;
+    width: fit-content;
+  }
+  .section-tab {
+    padding: 12px 28px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer; border: none; font-family: 'Syne', sans-serif;
+    background: transparent; color: var(--stone); transition: all 0.2s; position: relative;
+  }
+  .section-tab.active { background: var(--dark); color: var(--lime); }
+  .section-tab:not(.active):hover { background: var(--parch); color: var(--ink); }
+
+  /* Category filter bar */
+  .mkt-filters {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; align-items: center;
+  }
+  .filter-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--stone); margin-right: 4px; }
+  .filter-btn {
+    padding: 7px 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; border: 1px solid rgba(78,122,53,0.2);
+    background: transparent; color: var(--stone); border-radius: 20px; cursor: pointer;
+    font-family: 'Syne', sans-serif; transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--field); border-color: var(--field); color: var(--cream); }
+
+  /* Search bar */
+  .mkt-search-wrap { position: relative; margin-bottom: 36px; max-width: 360px; }
+  .mkt-search {
+    width: 100%; padding: 11px 16px 11px 40px;
+    border: 1px solid rgba(78,122,53,0.2); background: var(--parch);
+    font-family: 'Syne', sans-serif; font-size: 13px; color: var(--ink);
+    border-radius: 2px; outline: none; transition: border-color 0.2s;
+  }
+  .mkt-search:focus { border-color: var(--lime); }
+  .mkt-search::placeholder { color: var(--stone); }
+  .mkt-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--stone); font-size: 14px; pointer-events: none; }
+
+  /* Controls row */
+  .mkt-controls { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
+  .mkt-count { font-size: 13px; color: var(--stone); }
+  .mkt-count strong { color: var(--ink); }
+  .mkt-sort { display: flex; align-items: center; gap: 8px; }
+  .sort-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); }
+  .sort-select {
+    padding: 7px 12px; font-size: 12px; font-family: 'Syne', sans-serif;
+    border: 1px solid rgba(78,122,53,0.2); background: var(--parch); color: var(--ink);
+    border-radius: 2px; outline: none; cursor: pointer;
+  }
+
+  /* Product grid */
+  .mkt-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-bottom: 48px;
+  }
+  @media (max-width: 1100px) { .mkt-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px)  { .mkt-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px)  { .mkt-grid { grid-template-columns: 1fr; } }
+
+  /* Product card */
+  .prod-card {
+    background: var(--cream); border: 1px solid rgba(78,122,53,0.12);
+    border-radius: 2px; overflow: hidden; transition: all 0.28s; cursor: pointer;
+    display: flex; flex-direction: column; position: relative;
+  }
+  .prod-card:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(15,26,10,0.1); border-color: rgba(78,122,53,0.3); }
+  .prod-card.hidden { display: none; }
+
+  .prod-img {
+    width: 100%; aspect-ratio: 1/0.82; overflow: hidden;
+    background: var(--parch); position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .prod-img-inner {
+    font-size: 56px; line-height: 1; transition: transform 0.35s;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .prod-card:hover .prod-img-inner { transform: scale(1.08); }
+  .prod-img-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--parch) 0%, var(--bg) 100%);
+  }
+  .prod-badge {
+    position: absolute; top: 10px; left: 10px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 1px; z-index: 1;
+  }
+  .badge-seasonal { background: var(--lime); color: var(--ink); }
+  .badge-limited  { background: var(--straw); color: var(--ink); }
+  .badge-new      { background: var(--dark); color: var(--lime); }
+  .badge-bulk     { background: var(--field); color: var(--cream); }
+
+  .prod-fave {
+    position: absolute; top: 10px; right: 10px; z-index: 1;
+    width: 28px; height: 28px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(253,250,243,0.85); font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; backdrop-filter: blur(4px);
+  }
+  .prod-fave:hover { background: var(--cream); transform: scale(1.1); }
+  .prod-fave.liked { background: #FFF0F0; }
+
+  .prod-body { padding: 16px 16px 20px; flex: 1; display: flex; flex-direction: column; }
+  .prod-farm {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--field); margin-bottom: 4px; display: flex; align-items: center; gap: 5px;
+  }
+  .prod-farm::before { content: ''; display: block; width: 12px; height: 1px; background: var(--field); }
+  .prod-name { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 4px; line-height: 1.2; }
+  .prod-desc { font-size: 12px; color: var(--stone); line-height: 1.6; margin-bottom: 12px; flex: 1; }
+  .prod-unit { font-size: 11px; color: var(--stone); margin-bottom: 8px; }
+
+  .prod-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; }
+  .prod-price { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--ink); }
+  .prod-add {
+    padding: 8px 16px; background: var(--ink); color: var(--lime);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; border-radius: 2px; cursor: pointer; font-family: 'Syne', sans-serif;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .prod-add:hover { background: var(--field); color: var(--cream); }
+  .prod-add.added { background: var(--lime); color: var(--ink); }
+
+  /* Qty stepper (shown after add) */
+  .prod-qty { display: none; align-items: center; gap: 0; border: 1px solid rgba(78,122,53,0.25); border-radius: 2px; }
+  .prod-qty.visible { display: flex; }
+  .qty-btn {
+    width: 28px; height: 28px; border: none; background: transparent; cursor: pointer;
+    font-size: 15px; color: var(--field); font-family: 'Syne', sans-serif; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+  }
+  .qty-btn:hover { background: var(--parch); }
+  .qty-val { font-size: 13px; font-weight: 700; color: var(--ink); min-width: 24px; text-align: center; }
+
+  /* Cart drawer */
+  .cart-overlay {
+    position: fixed; inset: 0; background: rgba(15,26,10,0.55);
+    z-index: 500; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    backdrop-filter: blur(3px);
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+  .cart-drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; width: 420px; max-width: 96vw;
+    background: var(--cream); z-index: 501; display: flex; flex-direction: column;
+    transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: -20px 0 60px rgba(15,26,10,0.2);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+  .cart-head {
+    padding: 24px 24px 20px; border-bottom: 1px solid rgba(78,122,53,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cart-title { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--ink); }
+  .cart-title span { font-style: italic; color: var(--field); }
+  .cart-close {
+    width: 36px; height: 36px; border: 1px solid rgba(78,122,53,0.2); border-radius: 50%;
+    background: transparent; cursor: pointer; font-size: 18px; color: var(--stone);
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  }
+  .cart-close:hover { background: var(--parch); color: var(--ink); }
+  .cart-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
+  .cart-empty { text-align: center; padding: 60px 0; }
+  .cart-empty-icon { font-size: 48px; margin-bottom: 16px; }
+  .cart-empty-text { font-family: 'Fraunces', serif; font-size: 20px; color: var(--stone); margin-bottom: 8px; }
+  .cart-empty-sub { font-size: 13px; color: var(--stone); }
+  .cart-item { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(78,122,53,0.08); }
+  .cart-item-emoji { font-size: 32px; flex-shrink: 0; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: var(--parch); border-radius: 2px; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .cart-item-farm { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--field); margin-bottom: 8px; }
+  .cart-item-controls { display: flex; align-items: center; justify-content: space-between; }
+  .cart-item-price { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: var(--ink); }
+  .cart-item-remove { font-size: 11px; color: var(--stone); border: none; background: none; cursor: pointer; text-decoration: underline; font-family: 'Syne', sans-serif; }
+  .cart-item-remove:hover { color: #B84040; }
+  .cart-foot {
+    padding: 20px 24px; border-top: 1px solid rgba(78,122,53,0.12);
+    background: var(--parch);
+  }
+  .cart-subtotal { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .cart-subtotal-label { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); }
+  .cart-subtotal-val { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; color: var(--ink); }
+  .cart-delivery-note { font-size: 12px; color: var(--field); margin-bottom: 16px; }
+  .cart-checkout {
+    width: 100%; padding: 16px; background: var(--lime); color: var(--ink);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; border-radius: 2px; cursor: pointer; font-family: 'Syne', sans-serif;
+    transition: all 0.25s; margin-bottom: 10px;
+  }
+  .cart-checkout:hover { background: var(--wheat); transform: translateY(-1px); }
+  .cart-checkout:disabled { background: var(--mist); color: var(--stone); cursor: default; transform: none; }
+  .cart-continue { width: 100%; padding: 12px; background: transparent; color: var(--stone); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(78,122,53,0.2); border-radius: 2px; cursor: pointer; font-family: 'Syne', sans-serif; transition: all 0.2s; }
+  .cart-continue:hover { border-color: var(--field); color: var(--field); }
+
+  /* Cart button in nav */
+  .nav-cart {
+    position: relative; width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(141,189,90,0.15); border: 1px solid rgba(141,189,90,0.3);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.25s; font-size: 16px;
+    flex-shrink: 0;
+  }
+  nav.scrolled .nav-cart { background: rgba(78,122,53,0.1); border-color: rgba(78,122,53,0.25); }
+  .nav-cart:hover { background: var(--lime); border-color: var(--lime); transform: scale(1.05); }
+  .cart-badge {
+    position: absolute; top: -4px; right: -4px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--lime); color: var(--ink);
+    font-size: 10px; font-weight: 700; font-family: 'Syne', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.2s; pointer-events: none;
+  }
+  .cart-badge.visible { opacity: 1; }
+
+  /* Grower info tooltip */
+  .grower-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--field); padding: 4px 10px; border: 1px solid rgba(78,122,53,0.2);
+    border-radius: 20px; cursor: default; white-space: nowrap;
+  }
+  .grower-chip::before { content: '🌾'; font-size: 11px; }
+
+  /* Load more */
+  .mkt-load-more { text-align: center; padding-top: 16px; }
+  .load-more-btn {
+    padding: 14px 40px; background: transparent; border: 1px solid rgba(78,122,53,0.25);
+    color: var(--stone); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    border-radius: 2px; cursor: pointer; font-family: 'Syne', sans-serif; transition: all 0.25s;
+  }
+  .load-more-btn:hover { border-color: var(--field); color: var(--field); background: rgba(78,122,53,0.04); }
+
+  /* Grower CTA strip inside marketplace */
+  .mkt-grower-cta {
+    margin-top: 56px; padding: 40px 48px;
+    background: var(--dark); display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  }
+  .mkt-grower-cta-text { }
+  .mkt-grower-cta-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lime); margin-bottom: 8px; }
+  .mkt-grower-cta h3 { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; color: var(--cream); margin-bottom: 6px; }
+  .mkt-grower-cta h3 em { font-style: italic; color: var(--lime); }
+  .mkt-grower-cta p { font-size: 13px; color: rgba(253,250,243,0.45); line-height: 1.7; max-width: 440px; }
+  .mkt-grower-btn {
+    padding: 14px 28px; background: var(--lime); color: var(--ink);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; border-radius: 2px; cursor: pointer; font-family: 'Syne', sans-serif;
+    white-space: nowrap; transition: all 0.25s; text-decoration: none; display: inline-block;
+  }
+  .mkt-grower-btn:hover { background: var(--wheat); }
+
+  /* ── REVEAL ── */
+  .r { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .r.on { opacity: 1; transform: none; }
+  .r2 { transition-delay: 0.1s; }
+  .r3 { transition-delay: 0.2s; }
+
+  @keyframes fadeup { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-driver { display: none; }
+    nav { padding: 18px 4vw; }
+    nav.scrolled { padding: 12px 4vw; }
+    .nav-right { gap: 8px; }
+    .nav-cta { padding: 8px 14px; white-space: nowrap; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo" style="display:flex;align-items:center;gap:12px;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" style="height:40px;width:40px;flex-shrink:0;">
+  <defs>
+    <linearGradient id="lgnav" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A8D96A"/><stop offset="100%" stop-color="#6BAF3C"/></linearGradient>
+    <linearGradient id="stnav" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8DBD5A"/><stop offset="100%" stop-color="#5A9A30"/></linearGradient>
+  </defs>
+  <path d="M32 54 Q32 38 32 22" stroke="url(#stnav)" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M32 44 Q25 38 20 30" stroke="#8DBD5A" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+  <path d="M32 37 Q23 29 19 20" stroke="#8DBD5A" stroke-width="1.7" stroke-linecap="round" opacity=".68"/>
+  <path d="M32 30 Q26 20 25 12" stroke="#8DBD5A" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
+  <path d="M32 44 Q39 38 44 30" stroke="#A8D96A" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+  <path d="M32 37 Q41 29 45 20" stroke="#A8D96A" stroke-width="1.7" stroke-linecap="round" opacity=".68"/>
+  <path d="M32 30 Q38 20 39 12" stroke="#A8D96A" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
+  <ellipse cx="19" cy="27" rx="4.5" ry="7.5" fill="url(#lgnav)" opacity=".75" transform="rotate(-20 19 27)"/>
+  <ellipse cx="18" cy="16" rx="4" ry="7" fill="url(#lgnav)" opacity=".6" transform="rotate(-13 18 16)"/>
+  <ellipse cx="24" cy="9" rx="3.5" ry="6" fill="url(#lgnav)" opacity=".44" transform="rotate(-5 24 9)"/>
+  <ellipse cx="45" cy="27" rx="4.5" ry="7.5" fill="url(#lgnav)" opacity=".85" transform="rotate(20 45 27)"/>
+  <ellipse cx="46" cy="16" rx="4" ry="7" fill="url(#lgnav)" opacity=".7" transform="rotate(13 46 16)"/>
+  <ellipse cx="40" cy="9" rx="3.5" ry="6" fill="url(#lgnav)" opacity=".54" transform="rotate(5 40 9)"/>
+  <ellipse cx="32" cy="13" rx="5" ry="8.5" fill="url(#lgnav)" opacity=".96"/>
+  <path d="M14 58 Q32 62 50 58" stroke="#8DBD5A" stroke-width="1.5" stroke-linecap="round" opacity=".32"/>
+  <path d="M18 62 Q32 65 46 62" stroke="#8DBD5A" stroke-width="1" stroke-linecap="round" opacity=".16"/>
+</svg>
+    <span style="display:flex;flex-direction:column;line-height:1;gap:1px;">
+      <span style="font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:900;letter-spacing:0.04em;color:#FDFAF3;white-space:nowrap;" class="paddock-word">PADDOCK</span>
+      <span style="font-family:'Playfair Display',Georgia,serif;font-size:23px;font-weight:900;font-style:italic;letter-spacing:-0.015em;color:#8DBD5A;white-space:nowrap;" class="route-word">Route</span>
+    </span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#boxes">Boxes</a></li>
+    <li><a href="#marketplace">Marketplace</a></li>
+    <li><a href="#national">Expand</a></li>
+    <li><a href="#drivers">Drive with us</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#drivers" class="nav-driver">Drive with us</a>
+    <button class="nav-cart" onclick="openCart()" id="nav-cart-btn" title="Your order">🛒<span class="cart-badge" id="cart-badge">0</span></button>
+    <a href="#signup" class="nav-cta">Join waitlist</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <p class="hero-kicker"><span class="kicker-pip"></span> Launching · Southern Downs, QLD</p>
+    <h1>Farm<br>fresh.<br><em>Delivered.</em></h1>
+    <p class="hero-sub-head">Direct from grower to your door.</p>
+    <p class="hero-body">Weekly produce boxes sourced straight from farms in the Southern Downs and Granite Belt. No distribution centres, no cold-store delays — picked fresh, packed by hand, delivered by locals.</p>
+    <div class="hero-btns">
+      <a href="#signup" class="btn-primary">Join the waitlist ↗</a>
+      <a href="#how" class="btn-ghost">How it works</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-n">48h</div>
+      <div class="hero-stat-l">Paddock to door</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">100%</div>
+      <div class="hero-stat-l">Local farms</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">0</div>
+      <div class="hero-stat-l">Middlemen</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Stone fruit from Stanthorpe ·</span>
+    <span class="ticker-item">Granite Belt apples ·</span>
+    <span class="ticker-item">Warwick farm eggs ·</span>
+    <span class="ticker-item">Seasonal vegetables ·</span>
+    <span class="ticker-item">Paddock to door in 48 hours ·</span>
+    <span class="ticker-item">No middlemen ·</span>
+    <span class="ticker-item">Supporting local growers ·</span>
+    <span class="ticker-item">Shop the Marketplace ·</span>
+    <span class="ticker-item">Custom produce orders ·</span>
+    <span class="ticker-item">Expanding nationally ·</span>
+    <span class="ticker-item">Stone fruit from Stanthorpe ·</span>
+    <span class="ticker-item">Granite Belt apples ·</span>
+    <span class="ticker-item">Warwick farm eggs ·</span>
+    <span class="ticker-item">Seasonal vegetables ·</span>
+    <span class="ticker-item">Paddock to door in 48 hours ·</span>
+    <span class="ticker-item">No middlemen ·</span>
+    <span class="ticker-item">Supporting local growers ·</span>
+    <span class="ticker-item">Expanding nationally ·</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="eyebrow r">The process</div>
+  <h2 class="r">Simple as a <em>Sunday morning.</em></h2>
+  <div class="steps r">
+    <div class="step">
+      <span class="step-n">1</span>
+      <span class="step-icon">🌱</span>
+      <h3>Choose your box</h3>
+      <p>Pick the size that suits your household. Contents rotate with the seasons — because that's what actually grows.</p>
+    </div>
+    <div class="step">
+      <span class="step-n">2</span>
+      <span class="step-icon">🚜</span>
+      <h3>Farmers harvest</h3>
+      <p>Your order is picked across Warwick, Stanthorpe, and the Granite Belt — within 48 hours of your delivery.</p>
+    </div>
+    <div class="step">
+      <span class="step-n">3</span>
+      <span class="step-icon">📦</span>
+      <h3>We pack it</h3>
+      <p>Packed by hand with a farm card naming every grower and simple recipe ideas for anything unfamiliar.</p>
+    </div>
+    <div class="step">
+      <span class="step-n">4</span>
+      <span class="step-icon">🚗</span>
+      <h3>A local delivers it</h3>
+      <p>Delivered by someone in your community. Skip, pause, or cancel anytime — no lock-in, ever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NATIONAL EXPANSION -->
+<section id="national">
+  <div class="national-inner">
+    <div class="r">
+      <div class="eyebrow">Built to scale</div>
+      <h2>Starting local.<br>Going <em>national.</em></h2>
+      <p class="national-body">Paddock Route is built to replicate: same model, same values, different region. When a new area reaches enough grower partners and subscriber demand, we activate it — with a local driver running the last mile.</p>
+      <div class="phase-list">
+        <div class="phase">
+          <div class="phase-num">1</div>
+          <div class="phase-content">
+            <div class="phase-title">Growers commit</div>
+            <div class="phase-desc">We build supply-side relationships in the region with local farmers.</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">2</div>
+          <div class="phase-content">
+            <div class="phase-title">Subscribers reach threshold</div>
+            <div class="phase-desc">Once a waitlist in a new area hits critical mass, the region goes live.</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">3</div>
+          <div class="phase-content">
+            <div class="phase-title">Driver activates the route</div>
+            <div class="phase-desc">A local driver registers, gets onboarded, and starts running weekly deliveries.</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">4</div>
+          <div class="phase-content">
+            <div class="phase-title">Region becomes self-sustaining</div>
+            <div class="phase-desc">Local supply, local delivery, local community. Repeat across Australia.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="r r2">
+      <div class="seq-map-wrap">
+
+        <div class="seq-map-head">
+          <div class="seq-map-label">South East QLD coverage</div>
+          <div class="seq-map-meta">26.5°S–28.5°S · 151°E–153.5°E</div>
+        </div>
+
+        <div class="seq-map" id="seq-map">
+
+          <!-- Base SVG: coast, state border, terrain, rivers -->
+          <svg viewBox="0 0 600 500" preserveAspectRatio="none"
+               xmlns="http://www.w3.org/2000/svg" fill="none"
+               style="position:absolute;inset:0;width:100%;height:100%;">
+            <defs>
+              <linearGradient id="land" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(78,122,53,0.04)"/>
+                <stop offset="100%" stop-color="rgba(78,122,53,0.10)"/>
+              </linearGradient>
+              <linearGradient id="ocean" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="rgba(20,40,60,0.0)"/>
+                <stop offset="100%" stop-color="rgba(40,80,110,0.18)"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Ocean wash on the right -->
+            <rect x="475" y="0" width="125" height="500" fill="url(#ocean)"/>
+
+            <!-- Land mass fill -->
+            <path d="M 0 0
+                     L 0 500
+                     L 600 500
+                     L 600 425
+                     L 525 410
+                     L 510 380
+                     L 505 345
+                     L 495 310
+                     L 478 275
+                     L 488 235
+                     L 500 200
+                     L 495 165
+                     L 478 130
+                     L 460 85
+                     L 445 50
+                     L 442 0 Z"
+                  fill="url(#land)"/>
+
+            <!-- Coastline (mainland eastern edge) -->
+            <path d="M 442 0
+                     C 444 30, 448 45, 460 85
+                     C 470 110, 478 130, 490 155
+                     C 498 175, 502 200, 488 235
+                     C 478 268, 482 285, 495 310
+                     C 502 330, 508 360, 510 380
+                     C 514 400, 520 410, 525 410
+                     L 600 425"
+                  stroke="rgba(141,189,90,0.55)" stroke-width="1.4" fill="none"/>
+
+            <!-- Moreton Bay inlet (Brisbane area) -->
+            <path d="M 488 235
+                     C 470 240, 460 245, 455 260
+                     C 452 275, 458 290, 472 295
+                     C 482 297, 490 290, 495 280"
+                  stroke="rgba(141,189,90,0.4)" stroke-width="1.1" fill="rgba(40,80,110,0.12)"/>
+
+            <!-- Moreton Island (offshore) -->
+            <path d="M 510 215 Q 520 230 515 255 Q 508 268 505 255 Q 500 235 510 215Z"
+                  stroke="rgba(141,189,90,0.35)" stroke-width="1" fill="rgba(78,122,53,0.05)"/>
+
+            <!-- North Stradbroke Island -->
+            <path d="M 515 280 Q 523 295 520 315 Q 514 322 510 312 Q 506 295 515 280Z"
+                  stroke="rgba(141,189,90,0.35)" stroke-width="1" fill="rgba(78,122,53,0.05)"/>
+
+            <!-- Bribie Island -->
+            <path d="M 488 165 Q 495 175 493 195 Q 488 200 485 190 Q 483 175 488 165Z"
+                  stroke="rgba(141,189,90,0.3)" stroke-width="0.9" fill="rgba(78,122,53,0.05)"/>
+
+            <!-- NSW/QLD border (28°S, dashed horizontal) -->
+            <line x1="0" y1="375" x2="495" y2="375"
+                  stroke="rgba(196,212,186,0.22)" stroke-width="1"
+                  stroke-dasharray="6 5"/>
+
+            <!-- Great Dividing Range (faint vertical-ish ridge) -->
+            <path d="M 280 0 Q 285 80 275 160 Q 268 240 270 320 Q 275 400 282 500"
+                  stroke="rgba(212,185,106,0.12)" stroke-width="14" fill="none"
+                  stroke-linecap="round"/>
+            <path d="M 280 0 Q 285 80 275 160 Q 268 240 270 320 Q 275 400 282 500"
+                  stroke="rgba(212,185,106,0.18)" stroke-width="1" fill="none"
+                  stroke-dasharray="2 4"/>
+
+            <!-- Brisbane River (Brisbane to Ipswich and out into Moreton Bay) -->
+            <path d="M 488 235 C 470 248, 445 252, 425 248 C 405 245, 385 240, 365 252"
+                  stroke="rgba(80,140,180,0.22)" stroke-width="1.2" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Condamine River (Darling Downs catchment) -->
+            <path d="M 230 305 C 250 310, 275 320, 300 330 C 325 340, 345 360, 360 365"
+                  stroke="rgba(80,140,180,0.18)" stroke-width="1" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Coverage radius around Southern Downs (active region halo) -->
+            <circle cx="305" cy="335" r="55"
+                    fill="rgba(141,189,90,0.04)"
+                    stroke="rgba(141,189,90,0.25)" stroke-width="1"
+                    stroke-dasharray="3 3"/>
+          </svg>
+
+          <!-- Compass -->
+          <div class="map-compass">
+            <div class="compass-arrow"></div>
+            <div class="compass-n">N</div>
+          </div>
+
+          <!-- Scale bar — 60px ≈ 50 km at this projection -->
+          <div class="map-scale">
+            <span>0</span>
+            <div class="scale-bar"></div>
+            <span>50 km</span>
+          </div>
+
+          <!-- Geographic labels -->
+          <div class="geo-label" style="left:88%;top:50%;transform:rotate(90deg) translateX(-50%);transform-origin:left top;">Coral Sea</div>
+          <div class="geo-label small" style="left:1%;top:84%;">New South Wales</div>
+          <div class="geo-label small" style="left:1%;top:64%;color:rgba(196,212,186,0.22);">Queensland</div>
+          <div class="border-label" style="left:50%;top:74%;">— QLD / NSW BORDER —</div>
+          <div class="geo-label small" style="left:46%;top:5%;letter-spacing:0.06em;color:rgba(212,185,106,0.22);transform:rotate(90deg);transform-origin:left top;">Great Dividing Range</div>
+
+          <!-- ─── CITIES (smaller neutral dots) ─── -->
+          <!-- Brisbane (capital) -->
+          <div class="city-dot" style="left:79%;top:48%;width:6px;height:6px;background:rgba(196,212,186,0.7);"></div>
+          <div class="city-label" style="left:79%;top:48%;font-weight:700;color:rgba(196,212,186,0.7);">Brisbane</div>
+
+          <!-- Other cities -->
+          <div class="city-dot" style="left:68%;top:43%;"></div>
+          <div class="city-label hide-mobile" style="left:68%;top:43%;">Ipswich</div>
+
+          <div class="city-dot" style="left:78%;top:25%;"></div>
+          <div class="city-label hide-mobile" style="left:78%;top:25%;">Sunshine Coast</div>
+
+          <div class="city-dot" style="left:81%;top:65%;"></div>
+          <div class="city-label hide-mobile" style="left:81%;top:65%;">Gold Coast</div>
+
+          <div class="city-dot" style="left:50%;top:46%;"></div>
+          <div class="city-label hide-mobile" style="left:50%;top:46%;">Toowoomba</div>
+
+          <div class="city-dot" style="left:73%;top:58%;"></div>
+          <div class="city-label hide-mobile" style="left:73%;top:58%;">Beaudesert</div>
+
+          <!-- ─── PADDOCK ROUTE REGIONS ─── -->
+
+          <!-- LIVE: Southern Downs (Warwick + Stanthorpe) -->
+          <div class="region-dot live" style="left:51%;top:67%;" title="Southern Downs"></div>
+          <div class="region-label live left" style="left:51%;top:67%;">
+            Southern Downs
+            <span class="lbl-meta">Live · Warwick + Stanthorpe</span>
+          </div>
+
+          <!-- ACTIVATING: Lockyer Valley (Gatton area, between Brisbane and Toowoomba) -->
+          <div class="region-dot activating" style="left:60%;top:46%;" title="Lockyer Valley"></div>
+          <div class="region-label activating" style="left:60%;top:46%;">
+            Lockyer Valley
+            <span class="lbl-meta">Activating · 70%</span>
+          </div>
+
+          <!-- ACTIVATING: Scenic Rim (south of Brisbane, around Boonah/Beaudesert) -->
+          <div class="region-dot activating" style="left:70%;top:62%;" title="Scenic Rim"></div>
+          <div class="region-label activating below" style="left:70%;top:62%;">
+            Scenic Rim
+            <span class="lbl-meta">Activating · 48%</span>
+          </div>
+
+          <!-- QUEUE: Sunshine Coast Hinterland -->
+          <div class="region-dot queue" style="left:74%;top:30%;" title="Sunshine Coast Hinterland"></div>
+          <div class="region-label queue left" style="left:74%;top:30%;">
+            Sunshine Coast
+            <span class="lbl-meta">Queue · 22%</span>
+          </div>
+
+          <!-- QUEUE: Gold Coast Hinterland -->
+          <div class="region-dot queue" style="left:75%;top:69%;" title="Gold Coast Hinterland"></div>
+          <div class="region-label queue" style="left:75%;top:69%;">
+            GC Hinterland
+            <span class="lbl-meta">Queue · 14%</span>
+          </div>
+
+          <!-- QUEUE: Northern Rivers (just over NSW border) -->
+          <div class="region-dot queue" style="left:73%;top:80%;" title="Northern Rivers"></div>
+          <div class="region-label queue" style="left:73%;top:80%;">
+            Northern Rivers
+            <span class="lbl-meta">Queue · NSW</span>
+          </div>
+
+          <!-- QUEUE: Toowoomba / Darling Downs East -->
+          <div class="region-dot queue" style="left:50%;top:46%;" title="Toowoomba"></div>
+          <div class="region-label queue below" style="left:50%;top:46%;">
+            Darling Downs
+            <span class="lbl-meta">Queue · 18%</span>
+          </div>
+
+        </div>
+
+        <!-- Legend -->
+        <div class="seq-legend">
+          <div class="legend-item"><div class="l-dot live"></div>Live now (1)</div>
+          <div class="legend-item"><div class="l-dot activating"></div>Activating (2)</div>
+          <div class="legend-item"><div class="l-dot queue"></div>Building waitlist (4)</div>
+        </div>
+
+        <!-- Detail cards -->
+        <div class="seq-details">
+
+          <!-- Featured: Currently serving -->
+          <div class="seq-detail-card featured">
+            <div class="seq-detail-tag live">● Live now</div>
+            <div class="seq-detail-name">Southern Downs</div>
+            <div class="seq-detail-meta">Warwick · Stanthorpe · Granite Belt — our launch region. ~2 hr SW of Brisbane.</div>
+            <div class="seq-detail-list">
+              <span class="seq-town-chip">Warwick</span>
+              <span class="seq-town-chip">Stanthorpe</span>
+              <span class="seq-town-chip">Allora</span>
+              <span class="seq-town-chip">Killarney</span>
+              <span class="seq-town-chip">Yangan</span>
+              <span class="seq-town-chip">Ballandean</span>
+              <span class="seq-town-chip">Glen Aplin</span>
+            </div>
+            <div class="seq-stats-row">
+              <div class="seq-stat-block">
+                <div class="seq-stat-num">7</div>
+                <div class="seq-stat-label">Anchor growers</div>
+              </div>
+              <div class="seq-stat-block">
+                <div class="seq-stat-num">2</div>
+                <div class="seq-stat-label">Route days/wk</div>
+              </div>
+              <div class="seq-stat-block">
+                <div class="seq-stat-num">48h</div>
+                <div class="seq-stat-label">Paddock to door</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activating next -->
+          <div class="seq-detail-card">
+            <div class="seq-detail-tag activating">→ Activating next</div>
+            <div class="seq-detail-name">Lockyer Valley</div>
+            <div class="seq-detail-meta">Gatton · Laidley · Plainland — Australia's salad bowl. Driver onboarded; 1 grower needed.</div>
+            <div class="seq-activation">
+              <div class="seq-act-row">
+                <span class="seq-act-label">Growers committed</span>
+                <span class="seq-act-val">3 / 4</span>
+              </div>
+              <div class="seq-progress"><div class="seq-progress-fill" style="width:75%"></div></div>
+            </div>
+            <div class="seq-activation">
+              <div class="seq-act-row">
+                <span class="seq-act-label">Waitlist subscribers</span>
+                <span class="seq-act-val">42 / 60</span>
+              </div>
+              <div class="seq-progress"><div class="seq-progress-fill" style="width:70%"></div></div>
+            </div>
+            <div class="seq-activation">
+              <div class="seq-act-row">
+                <span class="seq-act-label">Driver onboarded</span>
+                <span class="seq-act-val">✓ Yes</span>
+              </div>
+              <div class="seq-progress"><div class="seq-progress-fill" style="width:100%"></div></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRIVER SIGNUP -->
+<section id="drivers">
+  <div class="driver-inner">
+    <div class="r">
+      <div class="eyebrow">Drive with Paddock Route</div>
+      <h2>Run your own<br><em>local route.</em></h2>
+      <p class="driver-body">Paddock Route drivers are independent operators who run weekly delivery routes in their area. When your region reaches enough subscribers and grower partners, you go live. No boss, no targets — just a reliable weekly route with your community.</p>
+      <div class="perks">
+        <div class="perk">
+          <div class="perk-icon">📍</div>
+          <div>
+            <div class="perk-title">Your patch, your schedule</div>
+            <div class="perk-desc">You set the route and delivery days. We handle subscriptions, orders, and payments.</div>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">💰</div>
+          <div>
+            <div class="perk-title">Per-box earnings</div>
+            <div class="perk-desc">Earn a fixed rate per box delivered. As your region grows, so does your route.</div>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">📦</div>
+          <div>
+            <div class="perk-title">We do the logistics</div>
+            <div class="perk-desc">Boxes are packed and ready for you to collect. No sourcing, no customer service, no hassle.</div>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">🌱</div>
+          <div>
+            <div class="perk-title">Be part of something real</div>
+            <div class="perk-desc">You're the link between a local farm and a local kitchen. That matters.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="r r2">
+      <div class="driver-form-wrap">
+        <div class="driver-form-title">Register your interest</div>
+        <div class="driver-form-sub">Tell us where you are. We'll notify you when your area is ready to launch — and give you first right of refusal on the route.</div>
+        <form onsubmit="handleDriverSignup(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First name</label>
+              <input type="text" class="form-input" placeholder="Sam" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last name</label>
+              <input type="text" class="form-input" placeholder="Taylor">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-input" placeholder="sam@email.com.au" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" placeholder="04xx xxx xxx">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your region / area</label>
+            <select class="form-select">
+              <option value="">— Select your area —</option>
+              <optgroup label="🟢 Live Now">
+                <option>Southern Downs, QLD</option>
+              </optgroup>
+              <optgroup label="🟡 Coming Soon">
+                <option>Northern Rivers, NSW</option>
+                <option>Lockyer Valley, QLD</option>
+                <option>Hunter Valley, NSW</option>
+                <option>Yarra Valley, VIC</option>
+                <option>Barossa Valley, SA</option>
+                <option>Swan Valley, WA</option>
+              </optgroup>
+              <optgroup label="📌 Suggest a new area">
+                <option>Other (I'll describe below)</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Do you have your own vehicle?</label>
+            <select class="form-select">
+              <option>Yes — sedan / hatchback</option>
+              <option>Yes — SUV or wagon</option>
+              <option>Yes — van or ute</option>
+              <option>No — I'd need to arrange one</option>
+            </select>
+          </div>
+          <button type="submit" class="driver-submit" id="driver-submit-btn">Register my interest →</button>
+        </form>
+        <p class="driver-note" id="driver-note">No commitment required. We'll be in touch when your area is ready.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOXES -->
+<section id="boxes">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;flex-wrap:wrap;gap:20px;">
+    <div>
+      <div class="eyebrow r">Subscription boxes</div>
+      <h2 class="r" style="margin-bottom:0">Pick your <em>size.</em></h2>
+    </div>
+    <p class="r" style="font-size:13px;color:var(--stone);max-width:220px;line-height:1.65">Weekly subscription. Skip or cancel anytime — no fuss, no fine print.</p>
+  </div>
+  <div class="cards r">
+    <div class="box-card">
+      <div class="box-size">Small box</div>
+      <div class="box-name">The Duo</div>
+      <div class="box-for">1–2 people</div>
+      <div class="box-price">$35</div>
+      <div class="box-pw">per week</div>
+      <div class="box-divider"></div>
+      <ul class="box-list">
+        <li>6–8 seasonal items</li>
+        <li>Approx. 3–4 kg produce</li>
+        <li>Farm card included</li>
+        <li>Free delivery over $50</li>
+      </ul>
+      <button class="box-btn" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">Join waitlist</button>
+    </div>
+    <div class="box-card feat">
+      <div class="box-badge">Most popular</div>
+      <div class="box-size">Medium box</div>
+      <div class="box-name">The Family</div>
+      <div class="box-for">3–4 people</div>
+      <div class="box-price">$55</div>
+      <div class="box-pw">per week</div>
+      <div class="box-divider" style="background:rgba(141,189,90,0.15)"></div>
+      <ul class="box-list">
+        <li>10–12 seasonal items</li>
+        <li>Approx. 5–6 kg produce</li>
+        <li>Farm card + recipe ideas</li>
+        <li>Free delivery always</li>
+      </ul>
+      <button class="box-btn" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">Join waitlist</button>
+    </div>
+    <div class="box-card">
+      <div class="box-size">Large box</div>
+      <div class="box-name">The Harvest</div>
+      <div class="box-for">Large families or sharers</div>
+      <div class="box-price">$80</div>
+      <div class="box-pw">per week</div>
+      <div class="box-divider"></div>
+      <ul class="box-list">
+        <li>14–16 seasonal items</li>
+        <li>Approx. 8–10 kg produce</li>
+        <li>Farm card + recipe ideas</li>
+        <li>Free delivery always</li>
+      </ul>
+      <button class="box-btn" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">Join waitlist</button>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETPLACE -->
+<section id="marketplace">
+  <div class="mkt-header">
+    <div>
+      <div class="eyebrow r">Grower marketplace</div>
+      <h2 class="r" style="margin-bottom:0">Order <em>direct.</em></h2>
+    </div>
+    <p class="mkt-intro r">Browse produce and goods listed by our grower partners — buy the exact quantities you want, delivered with your next Paddock Route.</p>
+  </div>
+
+  <!-- Category Filters -->
+  <div class="mkt-filters r">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProducts('veg', this)">🥦 Vegetables</button>
+    <button class="filter-btn" onclick="filterProducts('fruit', this)">🍎 Fruit</button>
+    <button class="filter-btn" onclick="filterProducts('eggs', this)">🥚 Eggs & Dairy</button>
+    <button class="filter-btn" onclick="filterProducts('pantry', this)">🫙 Pantry</button>
+    <button class="filter-btn" onclick="filterProducts('honey', this)">🍯 Honey & Preserves</button>
+    <button class="filter-btn" onclick="filterProducts('bulk', this)">📦 Bulk Orders</button>
+  </div>
+
+  <!-- Search + Sort -->
+  <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:28px;">
+    <div class="mkt-search-wrap" style="margin-bottom:0">
+      <span class="mkt-search-icon">🔍</span>
+      <input type="text" class="mkt-search" placeholder="Search produce, farm, or keyword…" id="mkt-search-input" oninput="searchProducts(this.value)">
+    </div>
+    <div class="mkt-sort">
+      <span class="sort-label">Sort</span>
+      <select class="sort-select" onchange="sortProducts(this.value)">
+        <option value="default">Featured</option>
+        <option value="price-asc">Price: Low–High</option>
+        <option value="price-desc">Price: High–Low</option>
+        <option value="alpha">A–Z</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Count -->
+  <div class="mkt-controls r">
+    <p class="mkt-count"><strong id="product-count">16</strong> products from <strong>7</strong> local farms</p>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="mkt-grid r" id="mkt-grid">
+
+    <!-- VEGETABLES -->
+    <div class="prod-card" data-cat="veg" data-price="8.50" data-name="Heirloom Tomatoes">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFF5F0,#FDECD5)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🍅<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">1 kg</span></div>
+        <span class="prod-badge badge-seasonal">Seasonal</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Ridgewood Farm, Stanthorpe</div>
+        <div class="prod-name">Heirloom Tomatoes</div>
+        <div class="prod-desc">Mixed varieties — Cherokee Purple, Green Zebra, Brandywine. Vine-ripened, never refrigerated.</div>
+        <div class="prod-unit">per 1 kg punnet</div>
+        <div class="prod-footer">
+          <div class="prod-price">$8.50</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-0"><button class="qty-btn" onclick="changeQty('qty-0','prod-add-0',-1)">−</button><span class="qty-val" id="qty-val-0">1</span><button class="qty-btn" onclick="changeQty('qty-0','prod-add-0',1)">+</button></div>
+            <button class="prod-add" id="prod-add-0" onclick="addToCart(0,'Heirloom Tomatoes','Ridgewood Farm','🍅',8.50,this,'qty-0')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="veg" data-price="6.00" data-name="Baby Spinach">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#F0F8F0,#E8F4E4)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🥬<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">200 g</span></div>
+        <span class="prod-badge badge-new">New</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Granite Belt Greens, Ballandean</div>
+        <div class="prod-name">Baby Spinach</div>
+        <div class="prod-desc">Tender young leaves harvested at dawn, washed and ready to use. Grown without synthetic pesticides.</div>
+        <div class="prod-unit">per 200 g bag</div>
+        <div class="prod-footer">
+          <div class="prod-price">$6.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-1"><button class="qty-btn" onclick="changeQty('qty-1','prod-add-1',-1)">−</button><span class="qty-val" id="qty-val-1">1</span><button class="qty-btn" onclick="changeQty('qty-1','prod-add-1',1)">+</button></div>
+            <button class="prod-add" id="prod-add-1" onclick="addToCart(1,'Baby Spinach','Granite Belt Greens','🥬',6.00,this,'qty-1')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="veg" data-price="5.50" data-name="Dutch Cream Potatoes">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FEFBF0,#F8F0D8)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🥔<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">1.5 kg</span></div>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Warwick Valley Farm</div>
+        <div class="prod-name">Dutch Cream Potatoes</div>
+        <div class="prod-desc">Buttery, smooth-skinned Dutch Creams. Ideal for roasting, mashing, or potato salad. Freshly dug.</div>
+        <div class="prod-unit">per 1.5 kg bag</div>
+        <div class="prod-footer">
+          <div class="prod-price">$5.50</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-2"><button class="qty-btn" onclick="changeQty('qty-2','prod-add-2',-1)">−</button><span class="qty-val" id="qty-val-2">1</span><button class="qty-btn" onclick="changeQty('qty-2','prod-add-2',1)">+</button></div>
+            <button class="prod-add" id="prod-add-2" onclick="addToCart(2,'Dutch Cream Potatoes','Warwick Valley Farm','🥔',5.50,this,'qty-2')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="veg" data-price="4.50" data-name="Rainbow Chard">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFF0F8,#F8E8FF)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🌈<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">bunch</span></div>
+        <span class="prod-badge badge-seasonal">Seasonal</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Granite Belt Greens, Ballandean</div>
+        <div class="prod-name">Rainbow Chard</div>
+        <div class="prod-desc">Vibrant stems in red, yellow, and orange. Mild flavour, quick-wilting, gorgeous on the plate.</div>
+        <div class="prod-unit">per bunch (~6 stems)</div>
+        <div class="prod-footer">
+          <div class="prod-price">$4.50</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-3"><button class="qty-btn" onclick="changeQty('qty-3','prod-add-3',-1)">−</button><span class="qty-val" id="qty-val-3">1</span><button class="qty-btn" onclick="changeQty('qty-3','prod-add-3',1)">+</button></div>
+            <button class="prod-add" id="prod-add-3" onclick="addToCart(3,'Rainbow Chard','Granite Belt Greens','🌈',4.50,this,'qty-3')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRUIT -->
+    <div class="prod-card" data-cat="fruit" data-price="14.00" data-name="Stanthorpe Peaches">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFF3E8,#FFE4CC)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🍑<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">1.5 kg</span></div>
+        <span class="prod-badge badge-limited">Limited</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Ballandean Estate Orchards</div>
+        <div class="prod-name">Stanthorpe Peaches</div>
+        <div class="prod-desc">Sun-drenched, tree-ripened Yellow Flesh peaches from the Granite Belt. Available January–March only.</div>
+        <div class="prod-unit">per 1.5 kg tray</div>
+        <div class="prod-footer">
+          <div class="prod-price">$14.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-4"><button class="qty-btn" onclick="changeQty('qty-4','prod-add-4',-1)">−</button><span class="qty-val" id="qty-val-4">1</span><button class="qty-btn" onclick="changeQty('qty-4','prod-add-4',1)">+</button></div>
+            <button class="prod-add" id="prod-add-4" onclick="addToCart(4,'Stanthorpe Peaches','Ballandean Estate Orchards','🍑',14.00,this,'qty-4')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="fruit" data-price="9.00" data-name="Granite Belt Apples">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#F5FFF5,#E8F8E8)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🍎<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">1 kg</span></div>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Ballandean Estate Orchards</div>
+        <div class="prod-name">Granite Belt Apples</div>
+        <div class="prod-desc">A mixed tray of Fujis, Galas, and Pink Ladies. Crisp, sweet, and genuinely local — not imported.</div>
+        <div class="prod-unit">per 1 kg mixed tray</div>
+        <div class="prod-footer">
+          <div class="prod-price">$9.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-5"><button class="qty-btn" onclick="changeQty('qty-5','prod-add-5',-1)">−</button><span class="qty-val" id="qty-val-5">1</span><button class="qty-btn" onclick="changeQty('qty-5','prod-add-5',1)">+</button></div>
+            <button class="prod-add" id="prod-add-5" onclick="addToCart(5,'Granite Belt Apples','Ballandean Estate Orchards','🍎',9.00,this,'qty-5')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="fruit" data-price="12.00" data-name="Mixed Berry Punnet">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFF0FF,#F8E4FF)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🫐<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">500 g</span></div>
+        <span class="prod-badge badge-limited">Limited</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Ridgewood Farm, Stanthorpe</div>
+        <div class="prod-name">Mixed Berry Punnet</div>
+        <div class="prod-desc">Blueberries, raspberries, and strawberries. Summer only. Order ahead — these go fast.</div>
+        <div class="prod-unit">per 500 g punnet</div>
+        <div class="prod-footer">
+          <div class="prod-price">$12.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-6"><button class="qty-btn" onclick="changeQty('qty-6','prod-add-6',-1)">−</button><span class="qty-val" id="qty-val-6">1</span><button class="qty-btn" onclick="changeQty('qty-6','prod-add-6',1)">+</button></div>
+            <button class="prod-add" id="prod-add-6" onclick="addToCart(6,'Mixed Berry Punnet','Ridgewood Farm','🫐',12.00,this,'qty-6')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EGGS & DAIRY -->
+    <div class="prod-card" data-cat="eggs" data-price="9.50" data-name="Free-Range Eggs">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFFBF0,#FFF5D8)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🥚<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">dozen</span></div>
+        <span class="prod-badge badge-seasonal">Popular</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Sunridge Poultry, Warwick</div>
+        <div class="prod-name">Free-Range Eggs</div>
+        <div class="prod-desc">Pasture-raised hens, genuine free range. Rich orange yolks. Collected daily, never stored more than 4 days.</div>
+        <div class="prod-unit">per dozen (12 eggs)</div>
+        <div class="prod-footer">
+          <div class="prod-price">$9.50</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-7"><button class="qty-btn" onclick="changeQty('qty-7','prod-add-7',-1)">−</button><span class="qty-val" id="qty-val-7">1</span><button class="qty-btn" onclick="changeQty('qty-7','prod-add-7',1)">+</button></div>
+            <button class="prod-add" id="prod-add-7" onclick="addToCart(7,'Free-Range Eggs','Sunridge Poultry','🥚',9.50,this,'qty-7')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="eggs" data-price="11.00" data-name="Raw Jersey Milk">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#F8FEFF,#EEF8FF)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🥛<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">2 L</span></div>
+        <span class="prod-badge badge-new">New</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Dalrymple Dairy, Rosenthal</div>
+        <div class="prod-name">Fresh Jersey Milk</div>
+        <div class="prod-desc">Non-homogenised, pasteurised Jersey milk. Thick cream line at the top. From 14 cows on 80 acres.</div>
+        <div class="prod-unit">per 2 litre bottle</div>
+        <div class="prod-footer">
+          <div class="prod-price">$11.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-8"><button class="qty-btn" onclick="changeQty('qty-8','prod-add-8',-1)">−</button><span class="qty-val" id="qty-val-8">1</span><button class="qty-btn" onclick="changeQty('qty-8','prod-add-8',1)">+</button></div>
+            <button class="prod-add" id="prod-add-8" onclick="addToCart(8,'Fresh Jersey Milk','Dalrymple Dairy','🥛',11.00,this,'qty-8')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANTRY -->
+    <div class="prod-card" data-cat="pantry" data-price="7.50" data-name="Cold-Pressed Sunflower Oil">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFFEE8,#FFF8CC)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🌻<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">500 ml</span></div>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Warwick Valley Farm</div>
+        <div class="prod-name">Cold-Pressed Sunflower Oil</div>
+        <div class="prod-desc">Single-origin, expeller-pressed. Light, clean flavour. Grown and pressed on the same property.</div>
+        <div class="prod-unit">per 500 ml bottle</div>
+        <div class="prod-footer">
+          <div class="prod-price">$7.50</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-9"><button class="qty-btn" onclick="changeQty('qty-9','prod-add-9',-1)">−</button><span class="qty-val" id="qty-val-9">1</span><button class="qty-btn" onclick="changeQty('qty-9','prod-add-9',1)">+</button></div>
+            <button class="prod-add" id="prod-add-9" onclick="addToCart(9,'Sunflower Oil','Warwick Valley Farm','🌻',7.50,this,'qty-9')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="pantry" data-price="13.00" data-name="Stone-Ground Flour">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FDFAF5,#F8F0E4)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🌾<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">1 kg</span></div>
+        <span class="prod-badge badge-new">New</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Southern Downs Grain Co.</div>
+        <div class="prod-name">Stone-Ground Wholemeal</div>
+        <div class="prod-desc">Hard red wheat milled on a heritage stone mill. Full bran and germ retained. Incredible for sourdough.</div>
+        <div class="prod-unit">per 1 kg bag</div>
+        <div class="prod-footer">
+          <div class="prod-price">$13.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-10"><button class="qty-btn" onclick="changeQty('qty-10','prod-add-10',-1)">−</button><span class="qty-val" id="qty-val-10">1</span><button class="qty-btn" onclick="changeQty('qty-10','prod-add-10',1)">+</button></div>
+            <button class="prod-add" id="prod-add-10" onclick="addToCart(10,'Stone-Ground Flour','Southern Downs Grain Co.','🌾',13.00,this,'qty-10')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HONEY & PRESERVES -->
+    <div class="prod-card" data-cat="honey" data-price="18.00" data-name="Wildflower Honey">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFFBF0,#FFF0CC)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🍯<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">500 g</span></div>
+        <span class="prod-badge badge-seasonal">Seasonal</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Granite Belt Honey, Stanthorpe</div>
+        <div class="prod-name">Wildflower Honey</div>
+        <div class="prod-desc">Raw, unfiltered, cold-extracted. Seasonal flavour profile depending on what's in bloom. No heating, no blending.</div>
+        <div class="prod-unit">per 500 g jar</div>
+        <div class="prod-footer">
+          <div class="prod-price">$18.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-11"><button class="qty-btn" onclick="changeQty('qty-11','prod-add-11',-1)">−</button><span class="qty-val" id="qty-val-11">1</span><button class="qty-btn" onclick="changeQty('qty-11','prod-add-11',1)">+</button></div>
+            <button class="prod-add" id="prod-add-11" onclick="addToCart(11,'Wildflower Honey','Granite Belt Honey','🍯',18.00,this,'qty-11')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="honey" data-price="10.00" data-name="Apple & Ginger Chutney">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFF5F0,#FFE8DC)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🍶<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">280 g</span></div>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Ballandean Estate Orchards</div>
+        <div class="prod-name">Apple & Ginger Chutney</div>
+        <div class="prod-desc">Made in small batches from estate Granny Smiths, fresh ginger, and local sugar. No preservatives.</div>
+        <div class="prod-unit">per 280 g jar</div>
+        <div class="prod-footer">
+          <div class="prod-price">$10.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-12"><button class="qty-btn" onclick="changeQty('qty-12','prod-add-12',-1)">−</button><span class="qty-val" id="qty-val-12">1</span><button class="qty-btn" onclick="changeQty('qty-12','prod-add-12',1)">+</button></div>
+            <button class="prod-add" id="prod-add-12" onclick="addToCart(12,'Apple & Ginger Chutney','Ballandean Estate Orchards','🍶',10.00,this,'qty-12')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BULK ORDERS -->
+    <div class="prod-card" data-cat="bulk" data-price="38.00" data-name="Bulk Tomatoes 5 kg">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFF5F0,#FFE4D4)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🍅<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">5 kg</span></div>
+        <span class="prod-badge badge-bulk">Bulk</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Ridgewood Farm, Stanthorpe</div>
+        <div class="prod-name">Bulk Roma Tomatoes</div>
+        <div class="prod-desc">Perfect for passata, sauce, or preserving. Roma variety — low moisture, deep flavour. Pre-order 48 hours ahead.</div>
+        <div class="prod-unit">per 5 kg box · save 10%</div>
+        <div class="prod-footer">
+          <div class="prod-price">$38.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-13"><button class="qty-btn" onclick="changeQty('qty-13','prod-add-13',-1)">−</button><span class="qty-val" id="qty-val-13">1</span><button class="qty-btn" onclick="changeQty('qty-13','prod-add-13',1)">+</button></div>
+            <button class="prod-add" id="prod-add-13" onclick="addToCart(13,'Bulk Roma Tomatoes','Ridgewood Farm','🍅',38.00,this,'qty-13')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="bulk" data-price="28.00" data-name="Bulk Eggs 5 dozen">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#FFFCF0,#FFF5D8)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🥚<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">5 doz</span></div>
+        <span class="prod-badge badge-bulk">Bulk</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Sunridge Poultry, Warwick</div>
+        <div class="prod-name">Bulk Free-Range Eggs</div>
+        <div class="prod-desc">5 dozen free-range eggs — ideal for cafés, families who bake, or anyone who goes through eggs quickly.</div>
+        <div class="prod-unit">per 60 eggs (5 dozen) · save 12%</div>
+        <div class="prod-footer">
+          <div class="prod-price">$28.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-14"><button class="qty-btn" onclick="changeQty('qty-14','prod-add-14',-1)">−</button><span class="qty-val" id="qty-val-14">1</span><button class="qty-btn" onclick="changeQty('qty-14','prod-add-14',1)">+</button></div>
+            <button class="prod-add" id="prod-add-14" onclick="addToCart(14,'Bulk Free-Range Eggs','Sunridge Poultry','🥚',28.00,this,'qty-14')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" data-cat="bulk" data-price="45.00" data-name="Bulk Apples 8 kg">
+      <div class="prod-img">
+        <div class="prod-img-bg" style="background:linear-gradient(135deg,#F5FFF5,#E4F8E4)"></div>
+        <div class="prod-img-inner" style="position:relative;z-index:1">🍎<span style="font-size:12px;font-weight:700;color:var(--stone);margin-top:4px">8 kg</span></div>
+        <span class="prod-badge badge-bulk">Bulk</span>
+        <button class="prod-fave" onclick="toggleFave(this)" title="Save">♡</button>
+      </div>
+      <div class="prod-body">
+        <div class="prod-farm">Ballandean Estate Orchards</div>
+        <div class="prod-name">Orchard Apple Case</div>
+        <div class="prod-desc">8 kg mixed Granite Belt apples — Fuji, Gala, Pink Lady. Great for juicing, baking, or a full household supply.</div>
+        <div class="prod-unit">per 8 kg case · save 15%</div>
+        <div class="prod-footer">
+          <div class="prod-price">$45.00</div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div class="prod-qty" id="qty-15"><button class="qty-btn" onclick="changeQty('qty-15','prod-add-15',-1)">−</button><span class="qty-val" id="qty-val-15">1</span><button class="qty-btn" onclick="changeQty('qty-15','prod-add-15',1)">+</button></div>
+            <button class="prod-add" id="prod-add-15" onclick="addToCart(15,'Orchard Apple Case','Ballandean Estate Orchards','🍎',45.00,this,'qty-15')">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end mkt-grid -->
+
+  <!-- Grower sell CTA -->
+  <div class="mkt-grower-cta r">
+    <div class="mkt-grower-cta-text">
+      <div class="mkt-grower-cta-tag">Growers</div>
+      <h3>List your produce on the <em>Marketplace.</em></h3>
+      <p>If you're a grower in a Paddock Route region, you can list your produce, eggs, honey, pantry goods, or bulk orders directly. We handle the orders, you provide the stock on delivery day.</p>
+    </div>
+    <a href="mailto:hello@paddockroute.com.au?subject=Marketplace grower listing" class="mkt-grower-btn">List your produce →</a>
+  </div>
+
+</section>
+
+
+<!-- PROMISE -->
+<section id="promise">
+  <div class="promise-grid">
+    <div class="r">
+      <div class="eyebrow">Our promise</div>
+      <h2>Why it <em>matters.</em></h2>
+    </div>
+    <div class="feats r r2">
+      <div class="feat"><h3>You know your farmer</h3><p>Every box names the farms behind your produce. No anonymous supply chains.</p></div>
+      <div class="feat"><h3>Genuinely seasonal</h3><p>Your box reflects what's actually growing near you right now — not interstate shelf-fillers.</p></div>
+      <div class="feat"><h3>Fair for growers</h3><p>We pay growers directly and promptly, at fair prices. No auction floors, no retailer margins.</p></div>
+      <div class="feat"><h3>No lock-in</h3><p>Pause, skip, or cancel with a single tap. No phone calls, no fine print, no catch.</p></div>
+      <div class="feat"><h3>Fresher produce</h3><p>Paddock to door in 48 hours. Supermarket chains average 7–14 days. The difference is real.</p></div>
+      <div class="feat"><h3>Community-powered</h3><p>Local growers, local drivers, local customers. The money circulates where it belongs.</p></div>
+      <div class="feat"><h3>Built to stay full</h3><p>When a bad season hits one region, our grower network can step in from neighbouring areas. You get a full box and a story — not an apology.</p></div>
+      <div class="feat"><h3>Less waste</h3><p>Picked to order, packed in returnable crates. No shrink-wrap, no shelf-life write-offs, no produce trucked back to a warehouse.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBER SIGNUP -->
+<section id="signup">
+  <div class="signup-inner r">
+    <p class="signup-tag">Launching soon · Southern Downs, QLD</p>
+    <h2>Be first through <em>the gate.</em></h2>
+    <p class="signup-sub">Join the waitlist for early access, a founding member discount, and first pick of delivery days.</p>
+    <form class="signup-form" onsubmit="handleSignup(event)">
+      <input type="email" class="signup-input" placeholder="Your email address" id="email-input" required>
+      <button type="submit" class="signup-btn">Join</button>
+    </form>
+    <p class="signup-note" id="signup-note">No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="f-brand" style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" style="height:40px;width:40px;flex-shrink:0;">
+  <defs>
+    <linearGradient id="lgft" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A8D96A"/><stop offset="100%" stop-color="#6BAF3C"/></linearGradient>
+    <linearGradient id="stft" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8DBD5A"/><stop offset="100%" stop-color="#5A9A30"/></linearGradient>
+  </defs>
+  <path d="M32 54 Q32 38 32 22" stroke="url(#stft)" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M32 44 Q25 38 20 30" stroke="#8DBD5A" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+  <path d="M32 37 Q23 29 19 20" stroke="#8DBD5A" stroke-width="1.7" stroke-linecap="round" opacity=".68"/>
+  <path d="M32 30 Q26 20 25 12" stroke="#8DBD5A" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
+  <path d="M32 44 Q39 38 44 30" stroke="#A8D96A" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+  <path d="M32 37 Q41 29 45 20" stroke="#A8D96A" stroke-width="1.7" stroke-linecap="round" opacity=".68"/>
+  <path d="M32 30 Q38 20 39 12" stroke="#A8D96A" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
+  <ellipse cx="19" cy="27" rx="4.5" ry="7.5" fill="url(#lgft)" opacity=".75" transform="rotate(-20 19 27)"/>
+  <ellipse cx="18" cy="16" rx="4" ry="7" fill="url(#lgft)" opacity=".6" transform="rotate(-13 18 16)"/>
+  <ellipse cx="24" cy="9" rx="3.5" ry="6" fill="url(#lgft)" opacity=".44" transform="rotate(-5 24 9)"/>
+  <ellipse cx="45" cy="27" rx="4.5" ry="7.5" fill="url(#lgft)" opacity=".85" transform="rotate(20 45 27)"/>
+  <ellipse cx="46" cy="16" rx="4" ry="7" fill="url(#lgft)" opacity=".7" transform="rotate(13 46 16)"/>
+  <ellipse cx="40" cy="9" rx="3.5" ry="6" fill="url(#lgft)" opacity=".54" transform="rotate(5 40 9)"/>
+  <ellipse cx="32" cy="13" rx="5" ry="8.5" fill="url(#lgft)" opacity=".96"/>
+  <path d="M14 58 Q32 62 50 58" stroke="#8DBD5A" stroke-width="1.5" stroke-linecap="round" opacity=".32"/>
+  <path d="M18 62 Q32 65 46 62" stroke="#8DBD5A" stroke-width="1" stroke-linecap="round" opacity=".16"/>
+</svg>
+        <span style="display:flex;flex-direction:column;line-height:1;gap:1px;">
+      <span style="font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:900;letter-spacing:0.04em;color:#FDFAF3;white-space:nowrap;">PADDOCK</span>
+      <span style="font-family:'Playfair Display',Georgia,serif;font-size:23px;font-weight:900;font-style:italic;letter-spacing:-0.015em;color:#8DBD5A;white-space:nowrap;">Route</span>
+    </span>
+      </div>
+      <p class="f-tag">Farm-fresh produce boxes and a grower marketplace — local farms, local drivers, delivered across Australia.</p>
+    </div>
+    <div>
+      <div class="f-head">Navigate</div>
+      <ul class="f-links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#boxes">Our boxes</a></li>
+        <li><a href="#marketplace">Marketplace</a></li>
+        <li><a href="#national">Going national</a></li>
+        <li><a href="#drivers">Drive with us</a></li>
+        <li><a href="#signup">Join waitlist</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-head">Contact</div>
+      <ul class="f-links">
+        <li><a href="mailto:hello@paddockroute.com.au">hello@paddockroute.com.au</a></li>
+        <li><span class="f-static">Warwick, QLD 4370</span></li>
+        <li><a href="https://instagram.com/paddockroute" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://facebook.com/paddockroute" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-head">Info</div>
+      <ul class="f-links">
+        <li><a href="#">Delivery zones</a></li>
+        <li><a href="#">Grower partners</a></li>
+        <li><a href="#">Driver program</a></li>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <p>© 2026 Paddock Route Pty Ltd · ABN 73 512 858 386 · All rights reserved.</p>
+    <p>Warwick, QLD · Made in the Southern Downs</p>
+  </div>
+</footer>
+
+<script>
+  // ── NAV SCROLL ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+  // ── REVEAL ON SCROLL ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); observer.unobserve(e.target); } });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.r').forEach(el => observer.observe(el));
+
+  // ── SIGNUP FORMS ──
+  function handleSignup(e) {
+    e.preventDefault();
+    const input = document.getElementById('email-input');
+    const note  = document.getElementById('signup-note');
+    note.textContent = "You're on the list — we'll be in touch before launch.";
+    note.style.color = 'rgba(232,212,154,0.9)';
+    input.value = ''; input.placeholder = "Thanks — you're on the list!";
+  }
+  function handleDriverSignup(e) {
+    e.preventDefault();
+    const btn  = document.getElementById('driver-submit-btn');
+    const note = document.getElementById('driver-note');
+    btn.textContent = "✓ Registered — we'll be in touch";
+    btn.style.background = 'var(--mist)'; btn.disabled = true;
+    note.textContent = "Thanks! We'll reach out when your area is ready to launch.";
+    note.style.color = 'rgba(196,212,186,0.7)';
+  }
+
+  // ── CART STATE ──
+  let cart = {}; // { id: { name, farm, emoji, price, qty } }
+
+  function openCart()  { document.getElementById('cart-overlay').classList.add('open'); document.getElementById('cart-drawer').classList.add('open'); renderCart(); }
+  function closeCart() { document.getElementById('cart-overlay').classList.remove('open'); document.getElementById('cart-drawer').classList.remove('open'); }
+
+  function addToCart(id, name, farm, emoji, price, btn, qtyId) {
+    const qty = parseInt(document.getElementById('qty-val-' + id).textContent) || 1;
+    if (cart[id]) { cart[id].qty += qty; }
+    else { cart[id] = { name, farm, emoji, price, qty }; }
+    btn.textContent = '✓ Added'; btn.classList.add('added');
+    setTimeout(() => { btn.textContent = 'Add'; btn.classList.remove('added'); }, 1200);
+    updateBadge(); renderCart();
+  }
+
+  function removeFromCart(id) {
+    delete cart[id]; updateBadge(); renderCart();
+  }
+
+  function changeCartQty(id, delta) {
+    if (!cart[id]) return;
+    cart[id].qty = Math.max(1, cart[id].qty + delta);
+    updateBadge(); renderCart();
+  }
+
+  function updateBadge() {
+    const total = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+    const badge = document.getElementById('cart-badge');
+    badge.textContent = total;
+    badge.classList.toggle('visible', total > 0);
+  }
+
+  function renderCart() {
+    const items  = document.getElementById('cart-items');
+    const empty  = document.getElementById('cart-empty');
+    const foot   = document.getElementById('cart-foot');
+    const totalEl = document.getElementById('cart-total');
+    const keys   = Object.keys(cart);
+
+    if (keys.length === 0) {
+      empty.style.display = ''; items.innerHTML = ''; foot.style.display = 'none'; return;
+    }
+    empty.style.display = 'none'; foot.style.display = '';
+
+    let total = 0;
+    items.innerHTML = keys.map(id => {
+      const item = cart[id];
+      const subtotal = item.price * item.qty;
+      total += subtotal;
+      return `<div class="cart-item">
+        <div class="cart-item-emoji">${item.emoji}</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-farm">${item.farm}</div>
+          <div class="cart-item-controls">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="prod-qty visible" style="border-color:rgba(78,122,53,0.2)">
+                <button class="qty-btn" onclick="changeCartQty(${id},-1)">−</button>
+                <span class="qty-val">${item.qty}</span>
+                <button class="qty-btn" onclick="changeCartQty(${id},1)">+</button>
+              </div>
+              <span style="font-size:12px;color:var(--stone)">× $${item.price.toFixed(2)}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span class="cart-item-price">$${subtotal.toFixed(2)}</span>
+              <button class="cart-item-remove" onclick="removeFromCart(${id})">Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+    totalEl.textContent = '$' + total.toFixed(2);
+  }
+
+  function handleCheckout() {
+    const btn = document.querySelector('.cart-checkout');
+    btn.textContent = "\u2713 Order received \u2014 we\u2019ll be in touch!";
+    btn.disabled = true;
+    btn.style.background = 'var(--field)'; btn.style.color = 'var(--cream)';
+    setTimeout(() => {
+      cart = {}; updateBadge(); renderCart();
+      btn.textContent = 'Place order →'; btn.disabled = false;
+      btn.style.background = ''; btn.style.color = '';
+      closeCart();
+    }, 2400);
+  }
+
+  // ── QTY STEPPER (product grid) ──
+  function changeQty(qtyId, btnId, delta) {
+    const valEl = document.getElementById('qty-val-' + qtyId.split('-')[1]);
+    const val = Math.max(1, parseInt(valEl.textContent) + delta);
+    valEl.textContent = val;
+    const qtyDiv = document.getElementById(qtyId);
+    qtyDiv.classList.toggle('visible', true);
+  }
+
+  // ── FAVOURITES ──
+  function toggleFave(btn) {
+    btn.classList.toggle('liked');
+    btn.textContent = btn.classList.contains('liked') ? '♥' : '♡';
+  }
+
+  // ── MARKETPLACE FILTERS ──
+  function filterProducts(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cards = document.querySelectorAll('.prod-card');
+    let count = 0;
+    cards.forEach(card => {
+      const match = cat === 'all' || card.dataset.cat === cat;
+      card.classList.toggle('hidden', !match);
+      if (match) count++;
+    });
+    document.getElementById('product-count').textContent = count;
+  }
+
+  function searchProducts(q) {
+    const query = q.toLowerCase().trim();
+    const cards = document.querySelectorAll('.prod-card');
+    let count = 0;
+    // Reset category filter
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.filter-btn').classList.add('active');
+    cards.forEach(card => {
+      const name = (card.dataset.name || '').toLowerCase();
+      const farm = (card.querySelector('.prod-farm')?.textContent || '').toLowerCase();
+      const desc = (card.querySelector('.prod-desc')?.textContent || '').toLowerCase();
+      const match = !query || name.includes(query) || farm.includes(query) || desc.includes(query);
+      card.classList.toggle('hidden', !match);
+      if (match) count++;
+    });
+    document.getElementById('product-count').textContent = count;
+  }
+
+  function sortProducts(val) {
+    const grid = document.getElementById('mkt-grid');
+    const cards = [...grid.querySelectorAll('.prod-card')];
+    cards.sort((a, b) => {
+      if (val === 'price-asc')  return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+      if (val === 'price-desc') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+      if (val === 'alpha')      return (a.dataset.name || '').localeCompare(b.dataset.name || '');
+      return 0;
+    });
+    cards.forEach(c => grid.appendChild(c));
+  }
+</script>
+
+<!-- CART OVERLAY + DRAWER -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <div class="cart-title">Your <span>order</span></div>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty" id="cart-empty">
+      <div class="cart-empty-icon">🌿</div>
+      <div class="cart-empty-text">Your cart is empty</div>
+      <div class="cart-empty-sub">Browse the marketplace and add some local produce.</div>
+    </div>
+    <div id="cart-items"></div>
+  </div>
+  <div class="cart-foot" id="cart-foot" style="display:none">
+    <div class="cart-subtotal">
+      <span class="cart-subtotal-label">Order total</span>
+      <span class="cart-subtotal-val" id="cart-total">$0.00</span>
+    </div>
+    <p class="cart-delivery-note">✓ Delivered with your next Paddock Route</p>
+    <button class="cart-checkout" onclick="handleCheckout()">Place order →</button>
+    <button class="cart-continue" onclick="closeCart()">Continue shopping</button>
+  </div>
+</div>
+
+</body>
+</html>
