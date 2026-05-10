@@ -709,8 +709,27 @@
     gap: 16px; margin-bottom: 48px;
   }
   @media (max-width: 1100px) { .mkt-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 760px)  { .mkt-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px)  { .mkt-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 760px)  { .mkt-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+  @media (max-width: 480px)  { .mkt-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } }
+
+  /* Compact card styles on small mobile */
+  @media (max-width: 480px) {
+    .prod-img-inner { font-size: 42px; }
+    .prod-body { padding: 10px 10px 12px; }
+    .prod-name { font-size: 13px; }
+    .prod-desc { display: none; }
+    .prod-unit { font-size: 10px; margin-bottom: 6px; }
+    .prod-price { font-size: 17px; }
+    .prod-add { padding: 7px 10px; font-size: 9px; letter-spacing: 0.08em; }
+    .prod-badge { font-size: 8px; padding: 3px 6px; }
+    .mkt-header { margin-bottom: 24px; }
+    .mkt-search-wrap { max-width: 100%; margin-bottom: 20px; }
+    .mkt-filters { gap: 6px; margin-bottom: 20px; }
+    .filter-btn { padding: 5px 12px; font-size: 10px; }
+    .mkt-controls { margin-bottom: 16px; }
+    .section-tabs { width: 100%; }
+    .section-tab { flex: 1; text-align: center; padding: 10px 16px; }
+  }
 
   /* Product card */
   .prod-card {
