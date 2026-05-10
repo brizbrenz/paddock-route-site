@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paddock Route — Farm to Door, Anywhere in Australia</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230F1A0A'/%3E%3Cdefs%3E%3ClinearGradient id='lg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23A8D96A'/%3E%3Cstop offset='100%25' stop-color='%236BAF3C'/%3E%3C/linearGradient%3E%3ClinearGradient id='st' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%238DBD5A'/%3E%3Cstop offset='100%25' stop-color='%235A9A30'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 54 Q32 38 32 22' stroke='url(%23st)' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M32 44 Q25 38 20 30' stroke='%238DBD5A' stroke-width='1.8' stroke-linecap='round' opacity='.85'/%3E%3Cpath d='M32 37 Q23 29 19 20' stroke='%238DBD5A' stroke-width='1.7' stroke-linecap='round' opacity='.68'/%3E%3Cpath d='M32 44 Q39 38 44 30' stroke='%23A8D96A' stroke-width='1.8' stroke-linecap='round' opacity='.85'/%3E%3Cpath d='M32 37 Q41 29 45 20' stroke='%23A8D96A' stroke-width='1.7' stroke-linecap='round' opacity='.68'/%3E%3Cellipse cx='19' cy='27' rx='4.5' ry='7.5' fill='url(%23lg)' opacity='.75' transform='rotate(-20 19 27)'/%3E%3Cellipse cx='45' cy='27' rx='4.5' ry='7.5' fill='url(%23lg)' opacity='.85' transform='rotate(20 45 27)'/%3E%3Cellipse cx='32' cy='13' rx='5' ry='8.5' fill='url(%23lg)' opacity='.96'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Syne:wght@400;500;700;800&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 <style>
@@ -705,11 +706,11 @@
   /* Product grid */
   .mkt-grid {
     display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 20px; margin-bottom: 48px;
+    gap: 16px; margin-bottom: 48px;
   }
-  @media (max-width: 1100px) { .mkt-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
-  @media (max-width: 760px)  { .mkt-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
-  @media (max-width: 380px)  { .mkt-grid { gap: 10px; } }
+  @media (max-width: 1100px) { .mkt-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px)  { .mkt-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px)  { .mkt-grid { grid-template-columns: 1fr; } }
 
   /* Product card */
   .prod-card {
@@ -717,7 +718,7 @@
     border-radius: 2px; overflow: hidden; transition: all 0.28s; cursor: pointer;
     display: flex; flex-direction: column; position: relative;
   }
-  .prod-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(15,26,10,0.12); border-color: rgba(78,122,53,0.32); }
+  .prod-card:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(15,26,10,0.1); border-color: rgba(78,122,53,0.3); }
   .prod-card.hidden { display: none; }
 
   .prod-img {
@@ -785,30 +786,6 @@
   }
   .qty-btn:hover { background: var(--parch); }
   .qty-val { font-size: 13px; font-weight: 700; color: var(--ink); min-width: 24px; text-align: center; }
-
-  /* ── Compact product cards on mobile (≤640px) — less scrolling ── */
-  @media (max-width: 640px) {
-    .prod-img { aspect-ratio: 1 / 0.7; }
-    .prod-img-inner { font-size: 38px; gap: 2px; }
-    .prod-img-inner span { font-size: 10px !important; margin-top: 2px !important; }
-    .prod-badge { top: 6px; left: 6px; font-size: 8px; padding: 3px 6px; letter-spacing: 0.08em; }
-    .prod-fave { top: 6px; right: 6px; width: 24px; height: 24px; font-size: 12px; }
-
-    .prod-body { padding: 10px 12px 12px; }
-    .prod-farm { font-size: 8.5px; letter-spacing: 0.1em; margin-bottom: 3px; gap: 4px; }
-    .prod-farm::before { width: 8px; }
-    .prod-name { font-size: 14px; line-height: 1.15; margin-bottom: 4px; }
-    .prod-desc { display: none; }
-    .prod-unit { display: none; }
-
-    .prod-footer { gap: 6px; }
-    .prod-price { font-size: 17px; }
-    .prod-add { padding: 6px 10px; font-size: 9px; letter-spacing: 0.08em; }
-    .prod-qty.visible + .prod-add { display: none; }
-    .prod-qty { gap: 0; }
-    .qty-btn { width: 22px; height: 24px; font-size: 13px; }
-    .qty-val { font-size: 12px; min-width: 18px; }
-  }
 
   /* Cart drawer */
   .cart-overlay {
@@ -1954,7 +1931,7 @@
       <h3>List your produce on the <em>Marketplace.</em></h3>
       <p>If you're a grower in a Paddock Route region, you can list your produce, eggs, honey, pantry goods, or bulk orders directly. We handle the orders, you provide the stock on delivery day.</p>
     </div>
-    <a href="mailto:hello@paddockroute.com.au?subject=Marketplace grower listing" class="mkt-grower-btn">List your produce →</a>
+    <a href="mailto:info@paddockroute.com.au?subject=Marketplace grower listing" class="mkt-grower-btn">List your produce →</a>
   </div>
 
 </section>
@@ -2042,7 +2019,7 @@
     <div>
       <div class="f-head">Contact</div>
       <ul class="f-links">
-        <li><a href="mailto:hello@paddockroute.com.au">hello@paddockroute.com.au</a></li>
+        <li><a href="mailto:info@paddockroute.com.au">info@paddockroute.com.au</a></li>
         <li><span class="f-static">Warwick, QLD 4370</span></li>
         <li><a href="https://instagram.com/paddockroute" target="_blank" rel="noopener">Instagram</a></li>
         <li><a href="https://facebook.com/paddockroute" target="_blank" rel="noopener">Facebook</a></li>
@@ -2060,7 +2037,7 @@
     </div>
   </div>
   <div class="footer-bar">
-    <p>© 2026 Paddock Route Pty Ltd. All rights reserved.</p>
+    <p>© 2026 Paddock Route Pty Ltd. All rights reserved. · ABN 73 512 858 386</p>
     <p>Warwick, QLD · Made in the Southern Downs</p>
   </div>
 </footer>
@@ -2120,7 +2097,7 @@
         // Leave button disabled so they can't double-submit
       })
       .catch(err => {
-        note.textContent = err.message || "Couldn't add you just now — please try again or email hello@paddockroute.com.au.";
+        note.textContent = err.message || "Couldn't add you just now — please try again or email info@paddockroute.com.au.";
         note.style.color = 'rgba(220,140,140,0.95)';
         btn.disabled = false;
         btn.textContent = originalBtnText;
@@ -2164,7 +2141,7 @@
       .catch(err => {
         btn.disabled = false;
         btn.textContent = originalBtnText;
-        note.textContent = err.message || "Couldn't register you just now — please try again or email hello@paddockroute.com.au.";
+        note.textContent = err.message || "Couldn't register you just now — please try again or email info@paddockroute.com.au.";
         note.style.color = 'rgba(220,140,140,0.95)';
       });
   }
