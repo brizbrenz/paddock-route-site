@@ -1154,57 +1154,68 @@
                      L 442 0 Z"
                   fill="url(#land)"/>
 
-            <!-- Coastline (mainland eastern edge) -->
+            <!-- Coastline (mainland eastern edge, smoothed) -->
             <path d="M 442 0
-                     C 444 30, 448 45, 460 85
-                     C 470 110, 478 130, 490 155
-                     C 498 175, 502 200, 488 235
-                     C 478 268, 482 285, 495 310
-                     C 502 330, 508 360, 510 380
-                     C 514 400, 520 410, 525 410
+                     C 444 28, 449 48, 462 88
+                     C 472 115, 482 138, 492 158
+                     C 500 178, 502 200, 488 235
+                     C 478 268, 482 286, 495 310
+                     C 503 332, 508 360, 512 382
+                     C 515 402, 521 411, 528 412
                      L 600 425"
-                  stroke="rgba(141,189,90,0.55)" stroke-width="1.4" fill="none"/>
+                  stroke="rgba(141,189,90,0.6)" stroke-width="1.4" fill="none"/>
 
-            <!-- Moreton Bay inlet (Brisbane area) -->
+            <!-- Moreton Bay inlet (Brisbane area, refined) -->
             <path d="M 488 235
-                     C 470 240, 460 245, 455 260
-                     C 452 275, 458 290, 472 295
-                     C 482 297, 490 290, 495 280"
-                  stroke="rgba(141,189,90,0.4)" stroke-width="1.1" fill="rgba(40,80,110,0.12)"/>
+                     C 470 240, 458 248, 454 262
+                     C 450 278, 458 292, 472 296
+                     C 484 298, 492 290, 496 280
+                     C 498 270, 498 252, 495 240"
+                  stroke="rgba(141,189,90,0.45)" stroke-width="1.1" fill="rgba(40,80,110,0.14)"/>
 
-            <!-- Moreton Island (offshore) -->
-            <path d="M 510 215 Q 520 230 515 255 Q 508 268 505 255 Q 500 235 510 215Z"
-                  stroke="rgba(141,189,90,0.35)" stroke-width="1" fill="rgba(78,122,53,0.05)"/>
+            <!-- Moreton Island (offshore, refined) -->
+            <path d="M 512 210 Q 524 228 520 258 Q 514 280 508 270 Q 502 245 501 228 Q 502 212 512 210 Z"
+                  stroke="rgba(141,189,90,0.4)" stroke-width="1" fill="rgba(78,122,53,0.06)"/>
 
             <!-- North Stradbroke Island -->
-            <path d="M 515 280 Q 523 295 520 315 Q 514 322 510 312 Q 506 295 515 280Z"
-                  stroke="rgba(141,189,90,0.35)" stroke-width="1" fill="rgba(78,122,53,0.05)"/>
+            <path d="M 517 282 Q 526 298 522 320 Q 514 328 509 318 Q 504 300 510 285 Q 514 280 517 282 Z"
+                  stroke="rgba(141,189,90,0.4)" stroke-width="1" fill="rgba(78,122,53,0.06)"/>
 
             <!-- Bribie Island -->
-            <path d="M 488 165 Q 495 175 493 195 Q 488 200 485 190 Q 483 175 488 165Z"
-                  stroke="rgba(141,189,90,0.3)" stroke-width="0.9" fill="rgba(78,122,53,0.05)"/>
+            <path d="M 490 162 Q 497 172 495 196 Q 490 202 487 192 Q 484 174 490 162 Z"
+                  stroke="rgba(141,189,90,0.35)" stroke-width="0.9" fill="rgba(78,122,53,0.06)"/>
 
             <!-- NSW/QLD border (28°S, dashed horizontal) -->
             <line x1="0" y1="375" x2="495" y2="375"
                   stroke="rgba(196,212,186,0.22)" stroke-width="1"
                   stroke-dasharray="6 5"/>
 
-            <!-- Great Dividing Range (faint vertical-ish ridge) -->
-            <path d="M 280 0 Q 285 80 275 160 Q 268 240 270 320 Q 275 400 282 500"
-                  stroke="rgba(212,185,106,0.12)" stroke-width="14" fill="none"
+            <!-- Great Dividing Range (highland ridge — runs between Southern Downs and the coast) -->
+            <!-- Wide highland band -->
+            <path d="M 392 -10 Q 400 80, 390 160 Q 380 245, 388 325 Q 398 405, 410 510"
+                  stroke="rgba(212,185,106,0.10)" stroke-width="26" fill="none"
                   stroke-linecap="round"/>
-            <path d="M 280 0 Q 285 80 275 160 Q 268 240 270 320 Q 275 400 282 500"
-                  stroke="rgba(212,185,106,0.18)" stroke-width="1" fill="none"
+            <!-- Inner ridge band -->
+            <path d="M 392 -10 Q 400 80, 390 160 Q 380 245, 388 325 Q 398 405, 410 510"
+                  stroke="rgba(212,185,106,0.16)" stroke-width="10" fill="none"
+                  stroke-linecap="round"/>
+            <!-- Ridge spine -->
+            <path d="M 392 -10 Q 400 80, 390 160 Q 380 245, 388 325 Q 398 405, 410 510"
+                  stroke="rgba(212,185,106,0.30)" stroke-width="1" fill="none"
                   stroke-dasharray="2 4"/>
-
-            <!-- Brisbane River (Brisbane to Ipswich and out into Moreton Bay) -->
-            <path d="M 488 235 C 470 248, 445 252, 425 248 C 405 245, 385 240, 365 252"
-                  stroke="rgba(80,140,180,0.22)" stroke-width="1.2" fill="none"
+            <!-- Western escarpment elevation ticks -->
+            <path d="M 378 70 l -7 -2 M 374 130 l -7 -2 M 370 190 l -7 -2 M 368 250 l -7 -2 M 372 310 l -7 -2 M 378 370 l -7 -2 M 386 430 l -7 -2"
+                  stroke="rgba(212,185,106,0.22)" stroke-width="0.8" fill="none"
                   stroke-linecap="round"/>
 
-            <!-- Condamine River (Darling Downs catchment) -->
-            <path d="M 230 305 C 250 310, 275 320, 300 330 C 325 340, 345 360, 360 365"
-                  stroke="rgba(80,140,180,0.18)" stroke-width="1" fill="none"
+            <!-- Brisbane River (rises west of Ipswich, flows through Ipswich and Brisbane into Moreton Bay) -->
+            <path d="M 395 295 C 415 290, 430 282, 445 272 C 460 264, 470 252, 478 240 C 484 234, 490 232, 496 238"
+                  stroke="rgba(95,155,195,0.45)" stroke-width="1.4" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Condamine River (rises on western slopes of GDR near Warwick, flows west toward Darling basin) -->
+            <path d="M 378 350 C 350 345, 310 335, 270 325 C 220 315, 160 308, 100 302"
+                  stroke="rgba(95,155,195,0.35)" stroke-width="1.1" fill="none"
                   stroke-linecap="round"/>
 
             <!-- Coverage radius around Southern Downs (active region halo) -->
@@ -1232,7 +1243,7 @@
           <div class="geo-label small" style="left:1%;top:84%;">New South Wales</div>
           <div class="geo-label small" style="left:1%;top:64%;color:rgba(196,212,186,0.22);">Queensland</div>
           <div class="border-label" style="left:50%;top:74%;">— QLD / NSW BORDER —</div>
-          <div class="geo-label small" style="left:46%;top:5%;letter-spacing:0.06em;color:rgba(212,185,106,0.22);transform:rotate(90deg);transform-origin:left top;">Great Dividing Range</div>
+          <div class="geo-label small" style="left:65%;top:5%;letter-spacing:0.08em;color:rgba(212,185,106,0.35);transform:rotate(90deg);transform-origin:left top;">Great Dividing Range</div>
 
           <!-- ─── CITIES (smaller neutral dots) ─── -->
           <!-- Brisbane (capital) -->
@@ -1240,8 +1251,8 @@
           <div class="city-label" style="left:79%;top:48%;font-weight:700;color:rgba(196,212,186,0.7);">Brisbane</div>
 
           <!-- Other cities -->
-          <div class="city-dot" style="left:68%;top:43%;"></div>
-          <div class="city-label hide-mobile" style="left:68%;top:43%;">Ipswich</div>
+          <div class="city-dot" style="left:74%;top:54%;"></div>
+          <div class="city-label hide-mobile" style="left:74%;top:54%;">Ipswich</div>
 
           <div class="city-dot" style="left:78%;top:25%;"></div>
           <div class="city-label hide-mobile" style="left:78%;top:25%;">Sunshine Coast</div>
@@ -1252,8 +1263,8 @@
           <div class="city-dot" style="left:50%;top:46%;"></div>
           <div class="city-label hide-mobile" style="left:50%;top:46%;">Toowoomba</div>
 
-          <div class="city-dot" style="left:73%;top:58%;"></div>
-          <div class="city-label hide-mobile" style="left:73%;top:58%;">Beaudesert</div>
+          <div class="city-dot" style="left:73%;top:61%;"></div>
+          <div class="city-label hide-mobile" style="left:73%;top:61%;">Beaudesert</div>
 
           <!-- ─── PADDOCK ROUTE REGIONS ─── -->
 
@@ -1264,9 +1275,9 @@
             <span class="lbl-meta">Live · Warwick + Stanthorpe</span>
           </div>
 
-          <!-- ACTIVATING: Lockyer Valley (Gatton area, between Brisbane and Toowoomba) -->
-          <div class="region-dot activating" style="left:60%;top:46%;" title="Lockyer Valley"></div>
-          <div class="region-label activating" style="left:60%;top:46%;">
+          <!-- ACTIVATING: Lockyer Valley (Gatton — east of the range, between Toowoomba and Ipswich) -->
+          <div class="region-dot activating" style="left:70%;top:49%;" title="Lockyer Valley"></div>
+          <div class="region-label activating below" style="left:70%;top:49%;">
             Lockyer Valley
             <span class="lbl-meta">Activating · 70%</span>
           </div>
