@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Paddock Route</title>
+<meta name="description" content="The terms of service governing your use of Paddock Route's farm-fresh produce subscription.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0F1A0A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230F1A0A'/%3E%3Cdefs%3E%3ClinearGradient id='lg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23A8D96A'/%3E%3Cstop offset='100%25' stop-color='%236BAF3C'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 54 Q32 38 32 22' stroke='%238DBD5A' stroke-width='2.2' stroke-linecap='round'/%3E%3Cellipse cx='32' cy='13' rx='5' ry='8.5' fill='url(%23lg)'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=Syne:wght@400;500;700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #0F1A0A;
+    --dark:   #1A2912;
+    --grove:  #2D4A20;
+    --field:  #4E7A35;
+    --lime:   #8DBD5A;
+    --straw:  #D4B96A;
+    --wheat:  #E8D49A;
+    --parch:  #F5EDD8;
+    --cream:  #FDFAF3;
+    --stone:  #7A7468;
+    --mist:   #C4D4BA;
+    --rust:   #B85A2A;
+    --bg:     #F0E8D0;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5vw;
+    background: rgba(253,250,243,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(78,122,53,0.12);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo .paddock-word {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 15px; font-weight: 900; letter-spacing: 0.04em;
+    color: var(--ink); line-height: 1;
+  }
+  .nav-logo .route-word {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px; font-weight: 900; font-style: italic;
+    letter-spacing: -0.015em; color: var(--field); line-height: 1; margin-top: 2px;
+  }
+  .nav-logo-text { display: flex; flex-direction: column; gap: 1px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+  .nav-links a {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--stone); text-decoration: none; transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--field); }
+  .nav-links a.active { color: var(--field); }
+  .nav-back {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 8px 16px; background: var(--field); color: var(--cream);
+    border-radius: 2px; text-decoration: none; transition: all 0.25s;
+  }
+  .nav-back:hover { background: var(--ink); }
+  @media (max-width: 760px) {
+    .nav-links { display: none; }
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    background: var(--ink);
+    padding: 140px 5vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header-bg {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+    background-image: linear-gradient(rgba(141,189,90,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(141,189,90,1) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .page-header-inner { position: relative; max-width: 860px; margin: 0 auto; }
+  .page-kicker {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--lime); margin-bottom: 24px;
+  }
+  .kicker-pip { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); }
+  .page-header h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+  .page-header h1 em {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 900;
+    color: var(--lime);
+  }
+  .page-header .lede {
+    font-size: 17px;
+    color: rgba(253,250,243,0.7);
+    max-width: 620px;
+    line-height: 1.55;
+  }
+  .page-meta {
+    margin-top: 32px;
+    display: flex; gap: 32px; flex-wrap: wrap;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(253,250,243,0.5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .page-meta span strong { color: var(--lime); font-weight: 500; margin-right: 6px; }
+
+  /* ── BODY CONTENT ── */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 5vw 100px;
+  }
+
+  /* ── TABLE OF CONTENTS ── */
+  .toc {
+    background: var(--parch);
+    border-left: 3px solid var(--field);
+    padding: 28px 32px;
+    margin-bottom: 64px;
+    border-radius: 2px;
+  }
+  .toc-head {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--field);
+    margin-bottom: 18px;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc-counter;
+    columns: 2; column-gap: 32px;
+  }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+  .toc li {
+    counter-increment: toc-counter;
+    padding: 4px 0;
+    break-inside: avoid;
+  }
+  .toc li::before {
+    content: counter(toc-counter, decimal-leading-zero) ".";
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--stone);
+    margin-right: 10px;
+  }
+  .toc a {
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .toc a:hover { color: var(--field); }
+
+  /* ── SECTIONS ── */
+  section.s {
+    margin-bottom: 56px;
+    scroll-margin-top: 100px;
+  }
+  section.s h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    display: flex; align-items: baseline; gap: 14px;
+  }
+  section.s h2 .s-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--field);
+    letter-spacing: 0.05em;
+  }
+  section.s h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--grove);
+    margin-top: 28px;
+    margin-bottom: 10px;
+  }
+  section.s p {
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+  section.s ul, section.s ol {
+    margin: 12px 0 18px 20px;
+  }
+  section.s li {
+    font-size: 15px;
+    margin-bottom: 8px;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+  section.s a {
+    color: var(--field);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  section.s a:hover { color: var(--ink); }
+  section.s strong { font-weight: 700; color: var(--ink); }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    background: var(--parch);
+    border-left: 3px solid var(--rust);
+    padding: 18px 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .callout-head {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 6px;
+  }
+  .callout-soft {
+    background: rgba(141,189,90,0.08);
+    border-left-color: var(--field);
+  }
+  .callout-soft .callout-head { color: var(--field); }
+
+  /* ── DEFINITIONS BLOCK ── */
+  .defs {
+    background: var(--cream);
+    border: 1px solid rgba(78,122,53,0.15);
+    padding: 24px 28px;
+    border-radius: 2px;
+    margin: 16px 0 24px;
+  }
+  .defs dt {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--grove);
+    margin-top: 12px;
+  }
+  .defs dt:first-child { margin-top: 0; }
+  .defs dd {
+    font-size: 14px;
+    color: var(--ink);
+    margin-left: 0;
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer { background: var(--ink); padding: 60px 5vw 0; margin-top: 0; }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 52px; padding-bottom: 52px;
+    max-width: 1280px; margin: 0 auto;
+  }
+  @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  .f-head {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--lime); margin-bottom: 18px;
+  }
+  .f-links { list-style: none; }
+  .f-links li { margin-bottom: 10px; }
+  .f-links a, .f-static {
+    font-size: 13px;
+    color: rgba(253,250,243,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .f-links a:hover { color: var(--lime); }
+  .f-tag {
+    font-size: 13px;
+    color: rgba(253,250,243,0.5);
+    line-height: 1.55;
+    max-width: 320px;
+  }
+  .footer-bar {
+    max-width: 1280px; margin: 0 auto;
+    border-top: 1px solid rgba(253,250,243,0.06);
+    padding: 20px 0 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .footer-bar p { font-size: 12px; color: rgba(253,250,243,0.3); }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    display: inline-block;
+    margin-top: 32px;
+    padding: 10px 18px;
+    border: 1px solid rgba(78,122,53,0.3);
+    color: var(--field);
+    text-decoration: none;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .back-top:hover { background: var(--field); color: var(--cream); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="paddock-route.html" class="nav-logo" aria-label="Paddock Route home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" style="height:36px;width:36px;flex-shrink:0;">
+  <defs>
+    <linearGradient id="lgn" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A8D96A"/><stop offset="100%" stop-color="#6BAF3C"/></linearGradient>
+    <linearGradient id="stn" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8DBD5A"/><stop offset="100%" stop-color="#5A9A30"/></linearGradient>
+  </defs>
+  <path d="M32 54 Q32 38 32 22" stroke="url(#stn)" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M32 44 Q25 38 20 30" stroke="#8DBD5A" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+  <path d="M32 37 Q23 29 19 20" stroke="#8DBD5A" stroke-width="1.7" stroke-linecap="round" opacity=".68"/>
+  <path d="M32 44 Q39 38 44 30" stroke="#A8D96A" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+  <path d="M32 37 Q41 29 45 20" stroke="#A8D96A" stroke-width="1.7" stroke-linecap="round" opacity=".68"/>
+  <ellipse cx="19" cy="27" rx="4.5" ry="7.5" fill="url(#lgn)" opacity=".75" transform="rotate(-20 19 27)"/>
+  <ellipse cx="45" cy="27" rx="4.5" ry="7.5" fill="url(#lgn)" opacity=".85" transform="rotate(20 45 27)"/>
+  <ellipse cx="32" cy="13" rx="5" ry="8.5" fill="url(#lgn)" opacity=".96"/>
+</svg>
+    <span class="nav-logo-text">
+      <span class="paddock-word">PADDOCK</span>
+      <span class="route-word">route</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="paddock-route-terms.html" class="active">Terms</a></li>
+    <li><a href="paddock-route-privacy.html">Privacy</a></li>
+    <li><a href="paddock-route-delivery-refunds.html">Delivery &amp; Refunds</a></li>
+    <li><a href="paddock-route.html" class="nav-back">← Home</a></li>
+  </ul>
+</nav><div id="top"></div><header class="page-header">
+  <div class="page-header-bg"></div>
+  <div class="page-header-inner">
+    <div class="page-kicker"><span class="kicker-pip"></span>Legal · Terms of Service</div>
+    <h1>Terms of <em>Service</em></h1>
+    <p class="lede">The agreement between you and Paddock Route when you use our website, place an order, or subscribe to a weekly Box.</p>
+    <div class="page-meta">
+      <span><strong>Last updated</strong>16 May 2026</span>
+      <span><strong>Effective</strong>1 June 2026</span>
+      <span><strong>Version</strong>1.0</span>
+    </div>
+  </div>
+</header><main class="content"><div class="toc">
+  <div class="toc-head">Contents</div>
+  <ol>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#definitions">Definitions</a></li>
+    <li><a href="#acceptance">Acceptance of these terms</a></li>
+    <li><a href="#eligibility">Eligibility</a></li>
+    <li><a href="#account">Your account</a></li>
+    <li><a href="#subscriptions">Subscriptions and billing</a></li>
+    <li><a href="#changes-pricing">Changes to plans and pricing</a></li>
+    <li><a href="#delivery">Delivery</a></li>
+    <li><a href="#cancellations">Cancellations, pauses and refunds</a></li>
+    <li><a href="#consumer-rights">Your rights under Australian Consumer Law</a></li>
+    <li><a href="#acceptable-use">Acceptable use</a></li>
+    <li><a href="#ip">Intellectual property</a></li>
+    <li><a href="#third-party">Third-party services</a></li>
+    <li><a href="#liability">Liability</a></li>
+    <li><a href="#indemnity">Indemnity</a></li>
+    <li><a href="#suspension">Suspension and termination</a></li>
+    <li><a href="#disputes">Disputes and governing law</a></li>
+    <li><a href="#changes-terms">Changes to these terms</a></li>
+    <li><a href="#general">General provisions</a></li>
+    <li><a href="#contact">Contact us</a></li>
+  </ol>
+</div><section class="s" id="intro">
+  <h2><span class="s-num">01</span>Introduction</h2>
+  
+  <p>Welcome to Paddock Route. These Terms of Service (<strong>Terms</strong>) govern your use of our website at paddockroute.com.au (the <strong>Site</strong>), our subscription produce box service, and any related services we provide (together, the <strong>Service</strong>).</p>
+  <p>The Service is operated by <strong>Paddock Route Pty Ltd</strong> (ABN 73 512 858 386), a company registered in Australia (referred to as <strong>Paddock Route</strong>, <strong>we</strong>, <strong>us</strong>, or <strong>our</strong>). Our registered address is Warwick, QLD 4370.</p>
+  <p>Please read these Terms carefully. By placing an order, creating an account, or otherwise using the Service, you agree to be bound by these Terms.</p>
+
+</section>
+<section class="s" id="definitions">
+  <h2><span class="s-num">02</span>Definitions</h2>
+  
+  <div class="defs">
+    <dt>Box</dt><dd>A weekly produce box containing fruit, vegetables, eggs, dairy, pantry items, or other goods we offer from time to time.</dd>
+    <dt>Customer / you</dt><dd>The person or entity who places an order or holds a subscription.</dd>
+    <dt>Grower</dt><dd>An independent farm or producer whose goods we source and on-sell through the Service.</dd>
+    <dt>Delivery Address</dt><dd>The address you nominate to receive Boxes.</dd>
+    <dt>Subscription</dt><dd>A recurring order placed through the Service under which Boxes are delivered to you on a periodic basis.</dd>
+    <dt>Cutoff Time</dt><dd>The deadline by which you must finalise changes, skips, pauses or cancellations for the next delivery — currently <strong>11:59pm Sunday</strong> for the following week's delivery, unless we tell you otherwise.</dd>
+  </div>
+
+</section>
+<section class="s" id="acceptance">
+  <h2><span class="s-num">03</span>Acceptance of these terms</h2>
+  
+  <p>By creating an account, placing an order, or using the Site, you confirm that:</p>
+  <ul>
+    <li>you have read, understood and agree to these Terms;</li>
+    <li>you have read and understood our <a href="paddock-route-privacy.html">Privacy Policy</a> and our <a href="paddock-route-delivery-refunds.html">Delivery &amp; Refunds policy</a>, each of which forms part of these Terms; and</li>
+    <li>you have the legal capacity to enter into a binding contract with us.</li>
+  </ul>
+  <p>If you do not agree to these Terms, you must not use the Service.</p>
+
+</section>
+<section class="s" id="eligibility">
+  <h2><span class="s-num">04</span>Eligibility</h2>
+  
+  <p>To use the Service, you must:</p>
+  <ul>
+    <li>be at least 18 years of age;</li>
+    <li>provide a valid Delivery Address within our current delivery area; and</li>
+    <li>provide accurate, current and complete information when registering or placing an order.</li>
+  </ul>
+  <p>Our current delivery area covers the Southern Downs and Granite Belt regions of Queensland. We will publish any expansion of this area on the Site. If your address falls outside our area, we may decline to fulfil your order.</p>
+
+</section>
+<section class="s" id="account">
+  <h2><span class="s-num">05</span>Your account</h2>
+  
+  <p>You may need to create an account to use parts of the Service. You are responsible for:</p>
+  <ul>
+    <li>keeping your login credentials confidential;</li>
+    <li>all activity that occurs under your account; and</li>
+    <li>notifying us immediately if you suspect unauthorised access.</li>
+  </ul>
+  <p>We may suspend or close your account if we reasonably believe you have breached these Terms or used the Service unlawfully.</p>
+
+</section>
+<section class="s" id="subscriptions">
+  <h2><span class="s-num">06</span>Subscriptions and billing</h2>
+  
+  <h3>How subscriptions work</h3>
+  <p>When you sign up for a Subscription, you authorise us to charge your nominated payment method on a recurring basis for each Box delivered to you, until you pause, skip or cancel in accordance with these Terms.</p>
+  <h3>Billing</h3>
+  <p>Payments are processed by our payment provider (currently Stripe Payments Australia Pty Ltd). We do not store full card numbers on our servers. By providing your payment details, you agree to the payment provider's terms.</p>
+  <p>You will be charged for each weekly delivery on or around the day your Box is dispatched. All prices are in Australian dollars (AUD) and include GST where applicable.</p>
+  <h3>Failed payments</h3>
+  <p>If a payment fails, we may retry the charge, contact you for an updated payment method, and pause your Subscription until payment is resolved. Repeated failed payments may result in cancellation of your Subscription.</p>
+  <h3>No lock-in</h3>
+  <p>There is no minimum subscription term. You may pause, skip or cancel at any time before the Cutoff Time, in accordance with section 09.</p>
+
+</section>
+<section class="s" id="changes-pricing">
+  <h2><span class="s-num">07</span>Changes to plans and pricing</h2>
+  
+  <p>We may change Box contents, sizes, prices, delivery fees or available plans from time to time. Where a change affects your active Subscription, we will give you reasonable notice (typically at least 14 days) by email before the change takes effect.</p>
+  <p>If you do not accept a price change, you may cancel your Subscription before the change takes effect. Your continued use of the Service after the effective date constitutes acceptance of the new pricing.</p>
+
+</section>
+<section class="s" id="delivery">
+  <h2><span class="s-num">08</span>Delivery</h2>
+  
+  <p>Delivery terms are set out in full in our <a href="paddock-route-delivery-refunds.html">Delivery &amp; Refunds policy</a>. In summary:</p>
+  <ul>
+    <li>We deliver weekly on days set out in your delivery zone schedule.</li>
+    <li>Risk in the goods passes to you on delivery to your Delivery Address. If you have authorised an unattended delivery, risk passes when the Box is left at the location you nominate.</li>
+    <li>Title in the goods passes to you on receipt of cleared payment.</li>
+    <li>You must ensure someone is available to receive the Box or provide safe instructions for unattended delivery.</li>
+  </ul>
+
+</section>
+<section class="s" id="cancellations">
+  <h2><span class="s-num">09</span>Cancellations, pauses and refunds</h2>
+  
+  <p>You can pause, skip or cancel your Subscription at any time through your account dashboard before the Cutoff Time. Changes made after the Cutoff Time will apply to the following week's delivery.</p>
+  <p>Refunds, credits, and our handling of damaged, missing or unsatisfactory items are detailed in our <a href="paddock-route-delivery-refunds.html">Delivery &amp; Refunds policy</a>.</p>
+  <p>Because Boxes contain perishable goods sourced and packed to order, we generally do not offer refunds for orders cancelled after the Cutoff Time. Your rights under the Australian Consumer Law are not affected.</p>
+
+</section>
+<section class="s" id="consumer-rights">
+  <h2><span class="s-num">10</span>Your rights under Australian Consumer Law</h2>
+  
+  <div class="callout callout-soft">
+    <div class="callout-head">Consumer guarantees</div>
+    Our goods come with guarantees that cannot be excluded under the Australian Consumer Law. You are entitled to a replacement or refund for a major failure and to compensation for any other reasonably foreseeable loss or damage. You are also entitled to have the goods repaired or replaced if the goods fail to be of acceptable quality and the failure does not amount to a major failure.
+  </div>
+  <p>Nothing in these Terms is intended to exclude, restrict or modify any rights you have under the Competition and Consumer Act 2010 (Cth), including the Australian Consumer Law, or any other applicable law that cannot be excluded.</p>
+  <p>If we are liable to you under a consumer guarantee, our liability is limited (to the extent permitted by law) to one or more of the following at our option: replacement of the goods, supply of equivalent goods, or refund of the price paid.</p>
+
+</section>
+<section class="s" id="acceptable-use">
+  <h2><span class="s-num">11</span>Acceptable use</h2>
+  
+  <p>When using the Service, you agree not to:</p>
+  <ul>
+    <li>use the Service for any unlawful purpose or in breach of any applicable law;</li>
+    <li>impersonate any person or misrepresent your affiliation;</li>
+    <li>interfere with, disrupt or attempt to gain unauthorised access to the Service or related systems;</li>
+    <li>upload viruses, malware or other harmful code; or</li>
+    <li>resell, on-sell or commercially exploit the goods we supply without our written consent.</li>
+  </ul>
+
+</section>
+<section class="s" id="ip">
+  <h2><span class="s-num">12</span>Intellectual property</h2>
+  
+  <p>All content on the Site, including the Paddock Route name and logo, text, graphics, design, photography and the structure and arrangement of the Site, is owned by us or our licensors and is protected by Australian and international copyright and trademark laws.</p>
+  <p>You may view and download content from the Site for your personal, non-commercial use only. You must not reproduce, modify, distribute or commercially exploit any of our content without our prior written consent.</p>
+
+</section>
+<section class="s" id="third-party">
+  <h2><span class="s-num">13</span>Third-party services</h2>
+  
+  <p>The Service may include links to, or rely on, third-party services (for example, payment processing, mapping, delivery couriers, or analytics). We are not responsible for the content, terms or practices of those third parties. Your use of their services is governed by their own terms and policies.</p>
+
+</section>
+<section class="s" id="liability">
+  <h2><span class="s-num">14</span>Liability</h2>
+  
+  <p>Subject to your rights under the Australian Consumer Law and any other rights that cannot be excluded:</p>
+  <ul>
+    <li>we provide the Service on an "as is" basis and make no warranties beyond those required by law;</li>
+    <li>to the maximum extent permitted by law, our total liability to you in connection with the Service in any 12-month period is limited to the amount you paid us in that period; and</li>
+    <li>we are not liable for any indirect, incidental, special or consequential loss (including loss of profit, business or data), however caused.</li>
+  </ul>
+
+</section>
+<section class="s" id="indemnity">
+  <h2><span class="s-num">15</span>Indemnity</h2>
+  
+  <p>You agree to indemnify us and our directors, employees, contractors and agents against any claim, loss, damage or expense (including reasonable legal costs) arising from your breach of these Terms, your misuse of the Service, or your breach of any law or the rights of a third party. This indemnity does not apply to the extent the loss is caused by our negligence or wilful misconduct.</p>
+
+</section>
+<section class="s" id="suspension">
+  <h2><span class="s-num">16</span>Suspension and termination</h2>
+  
+  <p>We may suspend or terminate your access to the Service at any time, with or without notice, if:</p>
+  <ul>
+    <li>you breach these Terms;</li>
+    <li>we are required to do so by law;</li>
+    <li>continuing to provide the Service to you would expose us to legal or operational risk; or</li>
+    <li>we cease to offer the Service generally.</li>
+  </ul>
+  <p>You may close your account at any time by cancelling your Subscription and contacting us. Sections that by their nature should survive termination (including those relating to liability, indemnity and intellectual property) will continue to apply.</p>
+
+</section>
+<section class="s" id="disputes">
+  <h2><span class="s-num">17</span>Disputes and governing law</h2>
+  
+  <p>These Terms are governed by the laws of Queensland, Australia. You and we submit to the non-exclusive jurisdiction of the courts of Queensland and the federal courts of Australia.</p>
+  <p>If you have a complaint, please contact us first at <a href="mailto:info@paddockroute.com.au">info@paddockroute.com.au</a>. We will try to resolve your concern in good faith within 14 days. If we can't reach a resolution, you may have rights to seek assistance from the Office of Fair Trading in your state or another consumer dispute resolution service.</p>
+
+</section>
+<section class="s" id="changes-terms">
+  <h2><span class="s-num">18</span>Changes to these terms</h2>
+  
+  <p>We may update these Terms from time to time. The "Last updated" date at the top of this page will show when the latest version was published. Where changes materially affect your rights or obligations, we will give you reasonable notice by email or a notice on the Site before the new Terms take effect.</p>
+  <p>Your continued use of the Service after the effective date of the updated Terms constitutes acceptance of the changes.</p>
+
+</section>
+<section class="s" id="general">
+  <h2><span class="s-num">19</span>General provisions</h2>
+  
+  <p><strong>Entire agreement.</strong> These Terms, together with our Privacy Policy and Delivery &amp; Refunds policy, constitute the entire agreement between you and us in relation to the Service.</p>
+  <p><strong>Severability.</strong> If any provision of these Terms is found to be unenforceable, the remaining provisions will remain in full force.</p>
+  <p><strong>No waiver.</strong> Our failure to enforce any right under these Terms will not be a waiver of that right.</p>
+  <p><strong>Assignment.</strong> You may not assign your rights under these Terms without our consent. We may assign our rights to a successor or related company.</p>
+  <p><strong>Force majeure.</strong> Neither party is liable for any failure to perform caused by an event beyond its reasonable control, including extreme weather, fire, flood, pandemic, supply chain failure, transport disruption or industrial action.</p>
+
+</section>
+<section class="s" id="contact">
+  <h2><span class="s-num">20</span>Contact us</h2>
+  
+  <p>If you have any questions about these Terms, please get in touch:</p>
+  <p>
+    <strong>Paddock Route Pty Ltd</strong><br>
+    Warwick, QLD 4370<br>
+    ABN: 73 512 858 386<br>
+    Email: <a href="mailto:info@paddockroute.com.au">info@paddockroute.com.au</a>
+  </p>
+  <a href="#top" class="back-top">↑ Back to top</a>
+
+</section></main><footer>
+  <div class="footer-grid">
+    <div>
+      <div class="f-brand" style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" style="height:40px;width:40px;flex-shrink:0;">
+  <defs>
+    <linearGradient id="lgf" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A8D96A"/><stop offset="100%" stop-color="#6BAF3C"/></linearGradient>
+    <linearGradient id="stf" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8DBD5A"/><stop offset="100%" stop-color="#5A9A30"/></linearGradient>
+  </defs>
+  <path d="M32 54 Q32 38 32 22" stroke="url(#stf)" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M32 44 Q25 38 20 30" stroke="#8DBD5A" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+  <path d="M32 37 Q23 29 19 20" stroke="#8DBD5A" stroke-width="1.7" stroke-linecap="round" opacity=".68"/>
+  <path d="M32 44 Q39 38 44 30" stroke="#A8D96A" stroke-width="1.8" stroke-linecap="round" opacity=".85"/>
+  <path d="M32 37 Q41 29 45 20" stroke="#A8D96A" stroke-width="1.7" stroke-linecap="round" opacity=".68"/>
+  <ellipse cx="19" cy="27" rx="4.5" ry="7.5" fill="url(#lgf)" opacity=".75" transform="rotate(-20 19 27)"/>
+  <ellipse cx="45" cy="27" rx="4.5" ry="7.5" fill="url(#lgf)" opacity=".85" transform="rotate(20 45 27)"/>
+  <ellipse cx="32" cy="13" rx="5" ry="8.5" fill="url(#lgf)" opacity=".96"/>
+</svg>
+        <span style="display:flex;flex-direction:column;line-height:1;gap:1px;">
+          <span style="font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:900;letter-spacing:0.04em;color:#FDFAF3;">PADDOCK</span>
+          <span style="font-family:'Playfair Display',Georgia,serif;font-size:23px;font-weight:900;font-style:italic;letter-spacing:-0.015em;color:#8DBD5A;">route</span>
+        </span>
+      </div>
+      <p class="f-tag">Farm-fresh produce boxes and a grower marketplace — local farms, local drivers, delivered across Australia.</p>
+    </div>
+    <div>
+      <div class="f-head">Navigate</div>
+      <ul class="f-links">
+        <li><a href="paddock-route.html">Home</a></li>
+        <li><a href="paddock-route.html#how">How it works</a></li>
+        <li><a href="paddock-route.html#boxes">Our boxes</a></li>
+        <li><a href="paddock-route.html#signup">Join waitlist</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-head">Contact</div>
+      <ul class="f-links">
+        <li><a href="mailto:info@paddockroute.com.au">info@paddockroute.com.au</a></li>
+        <li><span class="f-static">Warwick, QLD 4370</span></li>
+        <li><a href="https://www.instagram.com/paddockroute" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/share/1GcsGzffCv/" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-head">Legal</div>
+      <ul class="f-links">
+        <li><a href="paddock-route-terms.html">Terms of Service</a></li>
+        <li><a href="paddock-route-privacy.html">Privacy policy</a></li>
+        <li><a href="paddock-route-delivery-refunds.html">Delivery &amp; Refunds</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <p>© 2026 Paddock Route Pty Ltd. All rights reserved. · ABN 73 512 858 386</p>
+    <p>Warwick, QLD · Made in the Southern Downs</p>
+  </div>
+</footer>
+</body>
+</html>
