@@ -1,0 +1,36 @@
+# ─────────────────────────────────────────────
+#   Paddock Route — robots.txt
+#   https://paddockroute.com.au/
+# ─────────────────────────────────────────────
+
+# Default rule: allow everything to be crawled
+User-agent: *
+Allow: /
+
+# Block common low-value paths (in case they appear later)
+Disallow: /admin/
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Disallow: /*?*ref=
+Disallow: /*?*utm_
+
+# Block AI scrapers that don't drive traffic
+# (Comment these out if you change your mind)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://paddockroute.com.au/sitemap.xml

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://paddockroute.com.au/</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://paddockroute.com.au/og-image.jpg</image:loc>
+      <image:title>Paddock Route — Farm-fresh produce, delivered</image:title>
+      <image:caption>Weekly produce boxes from Southern Downs and Granite Belt farms</image:caption>
+    </image:image>
+  </url>
+
+  <!--
+    Add new URLs here as the site expands. Examples:
+
+    <url>
+      <loc>https://paddockroute.com.au/drivers</loc>
+      <lastmod>2026-05-16</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+    </url>
+
+    <url>
+      <loc>https://paddockroute.com.au/restaurants</loc>
+      <lastmod>2026-05-16</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+    </url>
+
+    Remember to update <lastmod> whenever a page changes.
+  -->
+
+</urlset>
