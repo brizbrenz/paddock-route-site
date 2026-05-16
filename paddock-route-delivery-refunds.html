@@ -77,8 +77,8 @@
     border-radius: 2px; text-decoration: none; transition: all 0.25s;
   }
   .nav-back:hover { background: var(--ink); }
-  @media (max-width: 760px) {
-    .nav-links { display: none; }
+  @media (max-width: 860px) {
+    .nav-links li:not(:last-child) { display: none; }
   }
 
   /* ── PAGE HEADER ── */
@@ -332,7 +332,7 @@
 </head>
 <body>
 <nav>
-  <a href="/" class="nav-logo" aria-label="Paddock Route home">
+  <a href="/" class="nav-logo" aria-label="Paddock Route — home">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" style="height:36px;width:36px;flex-shrink:0;">
   <defs>
     <linearGradient id="lgn" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#A8D96A"/><stop offset="100%" stop-color="#6BAF3C"/></linearGradient>
@@ -349,14 +349,16 @@
 </svg>
     <span class="nav-logo-text">
       <span class="paddock-word">PADDOCK</span>
-      <span class="route-word">route</span>
+      <span class="route-word">Route</span>
     </span>
   </a>
   <ul class="nav-links">
-    <li><a href="paddock-route-terms.html">Terms</a></li>
-    <li><a href="paddock-route-privacy.html">Privacy</a></li>
+    <li><a href="paddock-route-delivery-zones.html">Delivery Zones</a></li>
+    <li><a href="paddock-route-grower-partners.html">Grower Partners</a></li>
+    <li><a href="paddock-route-driver-program.html">Driver Program</a></li>
     <li><a href="paddock-route-delivery-refunds.html" class="active">Delivery &amp; Refunds</a></li>
-    <li><a href="/" class="nav-back">← Home</a></li>
+    <li><a href="https://paddockroute.online/">Status</a></li>
+    <li><a href="/" class="nav-back">&larr; Home</a></li>
   </ul>
 </nav><div id="top"></div><header class="page-header">
   <div class="page-header-bg"></div>
@@ -559,7 +561,7 @@
 </svg>
         <span style="display:flex;flex-direction:column;line-height:1;gap:1px;">
           <span style="font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:900;letter-spacing:0.04em;color:#FDFAF3;">PADDOCK</span>
-          <span style="font-family:'Playfair Display',Georgia,serif;font-size:23px;font-weight:900;font-style:italic;letter-spacing:-0.015em;color:#8DBD5A;">route</span>
+          <span style="font-family:'Playfair Display',Georgia,serif;font-size:23px;font-weight:900;font-style:italic;letter-spacing:-0.015em;color:#8DBD5A;">Route</span>
         </span>
       </div>
       <p class="f-tag">Farm-fresh produce boxes and a grower marketplace — local farms, local drivers, delivered across Australia.</p>
@@ -574,13 +576,12 @@
       </ul>
     </div>
     <div>
-      <div class="f-head">Info</div>
+      <div class="f-head">Contact</div>
       <ul class="f-links">
-        <li><a href="paddock-route-delivery-zones.html">Delivery zones</a></li>
-        <li><a href="paddock-route-grower-partners.html">Grower partners</a></li>
-        <li><a href="paddock-route-driver-program.html">Driver program</a></li>
         <li><a href="mailto:info@paddockroute.com.au">info@paddockroute.com.au</a></li>
         <li><span class="f-static">Warwick, QLD 4370</span></li>
+        <li><a href="https://www.instagram.com/paddockroute" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/share/1GcsGzffCv/" target="_blank" rel="noopener">Facebook</a></li>
       </ul>
     </div>
     <div>
@@ -589,6 +590,7 @@
         <li><a href="paddock-route-terms.html">Terms of Service</a></li>
         <li><a href="paddock-route-privacy.html">Privacy policy</a></li>
         <li><a href="paddock-route-delivery-refunds.html">Delivery &amp; Refunds</a></li>
+        <li><a href="https://paddockroute.online/">Service status</a></li>
       </ul>
     </div>
   </div>
