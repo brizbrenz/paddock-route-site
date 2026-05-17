@@ -615,14 +615,6 @@
   .form-select option { background: var(--grove); color: var(--cream); }
   .form-select:focus { border-color: var(--lime); }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .check-group { margin-bottom: 16px; }
-  .check-label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
-  .check-input {
-    width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px;
-    accent-color: var(--lime); cursor: pointer;
-  }
-  .check-text { font-size: 13px; color: rgba(253,250,243,0.65); line-height: 1.5; }
-
   .driver-submit {
     width: 100%; padding: 15px; background: var(--lime); color: var(--ink);
     font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
@@ -1203,7 +1195,7 @@
 
         <div class="seq-map-head">
           <div class="seq-map-label">South East QLD coverage</div>
-          <div class="seq-map-meta">26.5°S–28.5°S · 151°E–153.5°E</div>
+          <div class="seq-map-meta">26°S–29.5°S · 151°E–153.5°E</div>
         </div>
 
         <div class="seq-map" id="seq-map">
@@ -1539,13 +1531,34 @@
             <span class="lbl-meta">Queue · 18%</span>
           </div>
 
+          <!-- QUEUE: Mary Valley (Gympie hinterland — dairy, citrus, avocados, ginger) -->
+          <div class="region-dot queue" style="left:66%;top:12%;" title="Mary Valley"></div>
+          <div class="region-label queue left" style="left:66%;top:12%;">
+            Mary Valley
+            <span class="lbl-meta">Queue · QLD</span>
+          </div>
+
+          <!-- QUEUE: Brisbane Valley / Somerset (Esk · Fernvale · Lowood — small crops, eggs, dairy) -->
+          <div class="region-dot queue" style="left:62%;top:43%;" title="Brisbane Valley"></div>
+          <div class="region-label queue left" style="left:62%;top:43%;">
+            Brisbane Valley
+            <span class="lbl-meta">Queue · QLD</span>
+          </div>
+
+          <!-- QUEUE: New England High Country (Tenterfield · Glen Innes — NSW side of the Granite Belt) -->
+          <div class="region-dot queue" style="left:46%;top:90%;" title="New England High Country"></div>
+          <div class="region-label queue" style="left:46%;top:90%;">
+            New England
+            <span class="lbl-meta">Queue · NSW</span>
+          </div>
+
         </div>
 
         <!-- Legend -->
         <div class="seq-legend">
           <div class="legend-item"><div class="l-dot live"></div>Live now (1)</div>
           <div class="legend-item"><div class="l-dot activating"></div>Activating (2)</div>
-          <div class="legend-item"><div class="l-dot queue"></div>Building waitlist (4)</div>
+          <div class="legend-item"><div class="l-dot queue"></div>Building waitlist (7)</div>
         </div>
 
         <!-- Detail cards -->
@@ -1705,13 +1718,6 @@
               <option>Yes — van or ute</option>
               <option>No — I'd need to arrange one</option>
             </select>
-          </div>
-          <div class="check-group">
-            <label class="form-label">Cool storage</label>
-            <label class="check-label">
-              <input type="checkbox" class="check-input" id="driver-cool-storage">
-              <span class="check-text">I have a car fridge, cooler, or insulated box available</span>
-            </label>
           </div>
           <button type="submit" class="driver-submit" id="driver-submit-btn">Register my interest →</button>
         </form>
@@ -2379,7 +2385,6 @@
     const phone     = (document.getElementById('driver-phone').value || '').trim();
     const region    = document.getElementById('driver-region').value || '';
     const vehicle   = document.getElementById('driver-vehicle').value || '';
-    const coolStorage = document.getElementById('driver-cool-storage').checked;
 
     if (!email) return;
 
@@ -2395,8 +2400,7 @@
       lastName,
       phone,
       region,
-      vehicle,
-      coolStorage
+      vehicle
     })
       .then(() => {
         btn.textContent = "✓ Registered — we'll be in touch";
