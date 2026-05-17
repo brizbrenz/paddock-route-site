@@ -58,11 +58,14 @@ export async function onRequestPost({ request, env }) {
   const customFields = [
     { name: 'Signup Type', value: type }
   ];
-  if (body.firstName) customFields.push({ name: 'First Name', value: String(body.firstName).slice(0, 80) });
-  if (body.lastName)  customFields.push({ name: 'Last Name',  value: String(body.lastName).slice(0, 80) });
-  if (body.phone)     customFields.push({ name: 'Phone',      value: String(body.phone).slice(0, 40) });
-  if (body.region) customFields.push({ name: 'Delivery Region', value: String(body.region).slice(0, 120) });
-  if (body.vehicle)   customFields.push({ name: 'Vehicle',    value: String(body.vehicle).slice(0, 120) });
+  if (body.firstName)  customFields.push({ name: 'First Name',      value: String(body.firstName).slice(0, 80) });
+  if (body.lastName)   customFields.push({ name: 'Last Name',       value: String(body.lastName).slice(0, 80) });
+  if (body.phone)      customFields.push({ name: 'Phone',           value: String(body.phone).slice(0, 40) });
+  if (body.region)     customFields.push({ name: 'Delivery Region', value: String(body.region).slice(0, 120) });
+  if (body.vehicle)    customFields.push({ name: 'Vehicle',         value: String(body.vehicle).slice(0, 120) });
+  if (body.coolStorage !== undefined) {
+    customFields.push({ name: 'Cool Storage', value: body.coolStorage ? 'Yes' : 'No' });
+  }
 
   const payload = {
     email,
