@@ -1225,49 +1225,205 @@
             <!-- Ocean wash on the right -->
             <rect x="475" y="0" width="125" height="500" fill="url(#ocean)"/>
 
-            <!-- Land mass fill -->
-            <path d="M 0 0
-                     L 0 500
-                     L 515 500
-                     C 512 470, 510 445, 511 422
-                     C 513 408, 514 395, 512 380
-                     C 509 358, 503 332, 495 310
-                     C 482 286, 478 268, 488 235
-                     C 502 200, 500 178, 492 158
-                     C 482 138, 472 115, 462 88
-                     C 449 48, 444 28, 442 0 Z"
+            <!-- ════════════════════════════════════════════════════════════
+                 COASTLINE & WATER  (researched: Sunshine Coast → Cape Byron)
+                 Coast envelope reused for the land fill and the stroke.
+                 Key features N→S: Noosa headland · Caloundra · Pumicestone
+                 Passage (Bribie) · Deception Bay · Redcliffe peninsula ·
+                 Moreton Bay lagoon (Brisbane R. mouth) · Jumpinpin ·
+                 Gold Coast spit · Point Danger (border) · Cape Byron bulge
+                 (easternmost point of mainland Australia) · Ballina ·
+                 Clarence mouth (Yamba).
+                 ════════════════════════════════════════════════════════════ -->
+
+            <!-- ════════════════════════════════════════════════════════════
+                 COASTLINE, MORETON BAY & ISLANDS  (researched placement)
+                 N→S: Noosa Head · Caloundra/Pt Cartwright · Pumicestone
+                 Passage (Bribie) · Deception Bay · Redcliffe Peninsula ·
+                 Brisbane R. mouth · Wynnum–Cleveland–Redland bay shore ·
+                 Gold Coast · Point Danger (QLD/NSW border) · Fingal Head ·
+                 Cape Byron (easternmost mainland) · Lennox · Ballina
+                 (Richmond mouth) · Evans Head · Clarence mouth (Yamba).
+                 ════════════════════════════════════════════════════════════ -->
+
+            <!-- Land mass fill (eastern edge follows the detailed coastline) -->
+            <path d="M 506 0
+                     C 508 14, 508 26, 507 38
+                     C 511 40, 511 46, 507 52
+                     C 505 66, 504 82, 504 96
+                     C 506 104, 509 108, 508 114
+                     C 503 122, 499 132, 498 146
+                     C 497 158, 495 168, 497 178
+                     C 500 184, 506 188, 509 196
+                     C 510 204, 508 212, 503 216
+                     C 499 220, 497 226, 498 232
+                     C 499 235, 496 236, 495 240
+                     C 492 248, 489 256, 488 264
+                     C 491 268, 494 268, 493 274
+                     C 490 282, 488 290, 489 298
+                     C 494 304, 503 308, 509 314
+                     C 512 320, 513 328, 513 336
+                     C 513 344, 512 352, 512 360
+                     C 513 366, 513 372, 514 376
+                     C 515 380, 518 384, 519 389
+                     C 522 398, 526 410, 529 422
+                     C 531 428, 531 434, 530 438
+                     C 528 444, 524 448, 521 454
+                     C 519 458, 516 460, 515 464
+                     C 517 468, 516 472, 515 478
+                     C 516 484, 514 490, 512 496
+                     C 511 498, 510 499, 509 500
+                     L 0 500 L 0 0 Z"
                   fill="url(#land)"/>
 
-            <!-- Coastline (mainland eastern edge — continues south through NSW border without skewing east) -->
-            <path d="M 442 0
-                     C 444 28, 449 48, 462 88
-                     C 472 115, 482 138, 492 158
-                     C 500 178, 502 200, 488 235
-                     C 478 268, 482 286, 495 310
-                     C 503 332, 509 358, 512 380
-                     C 514 395, 513 408, 511 422
-                     C 510 445, 512 470, 515 500"
-                  stroke="rgba(141,189,90,0.6)" stroke-width="1.4" fill="none"/>
+            <!-- Moreton Bay lagoon (between mainland shore and the barrier islands) -->
+            <path d="M 498 206 C 506 210, 510 220, 509 240
+                     C 508 260, 505 280, 500 300
+                     C 508 302, 516 300, 519 282
+                     C 522 258, 521 232, 517 210
+                     C 511 202, 504 200, 498 206 Z"
+                  fill="rgba(40,80,110,0.17)" stroke="none"/>
 
-            <!-- Moreton Bay inlet (Brisbane area, refined) -->
-            <path d="M 488 235
-                     C 470 240, 458 248, 454 262
-                     C 450 278, 458 292, 472 296
-                     C 484 298, 492 290, 496 280
-                     C 498 270, 498 252, 495 240"
-                  stroke="rgba(141,189,90,0.45)" stroke-width="1.1" fill="rgba(40,80,110,0.14)"/>
+            <!-- Moreton Bay sandbanks (Moreton/Amity Banks — the bay's defining shoals) -->
+            <g stroke="rgba(141,189,90,0.18)" stroke-width="0.7" fill="none"
+               stroke-linecap="round">
+              <path d="M 511 226 C 514 232, 514 240, 512 248"/>
+              <path d="M 508 258 C 511 264, 511 272, 509 280"/>
+              <path d="M 514 262 C 516 268, 516 276, 514 284"/>
+            </g>
 
-            <!-- Moreton Island (offshore, refined) -->
-            <path d="M 512 210 Q 524 228 520 258 Q 514 280 508 270 Q 502 245 501 228 Q 502 212 512 210 Z"
-                  stroke="rgba(141,189,90,0.4)" stroke-width="1" fill="rgba(78,122,53,0.06)"/>
+            <!-- Pumicestone Passage (narrow water between Bribie I. and mainland) -->
+            <path d="M 506 120 C 509 134, 510 152, 510 172
+                     C 510 184, 508 190, 506 186
+                     C 504 168, 503 146, 504 128
+                     C 504 123, 505 120, 506 120 Z"
+                  fill="rgba(40,80,110,0.11)" stroke="none"/>
 
-            <!-- North Stradbroke Island -->
-            <path d="M 517 282 Q 526 298 522 320 Q 514 328 509 318 Q 504 300 510 285 Q 514 280 517 282 Z"
-                  stroke="rgba(141,189,90,0.4)" stroke-width="1" fill="rgba(78,122,53,0.06)"/>
+            <!-- The Broadwater (sheltered water behind South Stradbroke I.) -->
+            <path d="M 514 316 C 516 326, 516 338, 515 346
+                     C 514 348, 513 344, 513 334
+                     C 513 326, 513 318, 514 316 Z"
+                  fill="rgba(40,80,110,0.12)" stroke="none"/>
 
-            <!-- Bribie Island -->
-            <path d="M 490 162 Q 497 172 495 196 Q 490 202 487 192 Q 484 174 490 162 Z"
-                  stroke="rgba(141,189,90,0.35)" stroke-width="0.9" fill="rgba(78,122,53,0.06)"/>
+            <!-- Coastline stroke (mainland eastern edge only) -->
+            <path d="M 506 0
+                     C 508 14, 508 26, 507 38
+                     C 511 40, 511 46, 507 52
+                     C 505 66, 504 82, 504 96
+                     C 506 104, 509 108, 508 114
+                     C 503 122, 499 132, 498 146
+                     C 497 158, 495 168, 497 178
+                     C 500 184, 506 188, 509 196
+                     C 510 204, 508 212, 503 216
+                     C 499 220, 497 226, 498 232
+                     C 499 235, 496 236, 495 240
+                     C 492 248, 489 256, 488 264
+                     C 491 268, 494 268, 493 274
+                     C 490 282, 488 290, 489 298
+                     C 494 304, 503 308, 509 314
+                     C 512 320, 513 328, 513 336
+                     C 513 344, 512 352, 512 360
+                     C 513 366, 513 372, 514 376
+                     C 515 380, 518 384, 519 389
+                     C 522 398, 526 410, 529 422
+                     C 531 428, 531 434, 530 438
+                     C 528 444, 524 448, 521 454
+                     C 519 458, 516 460, 515 464
+                     C 517 468, 516 472, 515 478
+                     C 516 484, 514 490, 512 496
+                     C 511 498, 510 499, 509 500"
+                  stroke="rgba(141,189,90,0.6)" stroke-width="1.4" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- ── OFFSHORE BARRIER ISLANDS (N→S) ── -->
+
+            <!-- Bribie Island (long, thin; tapers to a spit at its north near Caloundra) -->
+            <path d="M 509 116 C 512 116, 514 122, 515 132
+                     C 516 148, 516 166, 515 182
+                     C 514 192, 512 196, 511 192
+                     C 510 178, 509 160, 508 142
+                     C 508 130, 508 120, 509 116 Z"
+                  stroke="rgba(141,189,90,0.42)" stroke-width="0.9"
+                  fill="rgba(78,122,53,0.07)"/>
+
+            <!-- Moreton Island (largest sand island; Cape Moreton at the NE tip) -->
+            <path d="M 524 148 C 530 150, 534 150, 535 158
+                     C 536 172, 535 190, 532 206
+                     C 530 220, 527 232, 523 235
+                     C 520 232, 519 218, 519 200
+                     C 519 182, 520 162, 524 148 Z"
+                  stroke="rgba(141,189,90,0.44)" stroke-width="1"
+                  fill="rgba(78,122,53,0.07)"/>
+
+            <!-- North Stradbroke Island (Point Lookout at the NE tip) -->
+            <path d="M 526 238 C 531 238, 534 242, 534 252
+                     C 534 266, 532 284, 528 298
+                     C 525 304, 521 306, 520 300
+                     C 519 286, 519 268, 520 252
+                     C 521 244, 523 238, 526 238 Z"
+                  stroke="rgba(141,189,90,0.44)" stroke-width="1"
+                  fill="rgba(78,122,53,0.07)"/>
+
+            <!-- South Stradbroke Island (Jumpinpin gap above, Gold Coast Seaway below) -->
+            <path d="M 517 314 C 520 316, 521 324, 521 332
+                     C 521 340, 520 347, 518 348
+                     C 516 345, 515 336, 515 326
+                     C 515 320, 515 314, 517 314 Z"
+                  stroke="rgba(141,189,90,0.4)" stroke-width="0.9"
+                  fill="rgba(78,122,53,0.07)"/>
+
+            <!-- Southern Moreton Bay Islands (Russell · Macleay · Lamb · Karragarra · Coochiemudlo) -->
+            <g fill="rgba(78,122,53,0.11)" stroke="rgba(141,189,90,0.32)" stroke-width="0.45">
+              <ellipse cx="507" cy="277" rx="2.3" ry="5.2"/><!-- Macleay -->
+              <ellipse cx="509" cy="289" rx="1.9" ry="5.8"/><!-- Russell -->
+              <circle  cx="504" cy="272" r="1.4"/><!-- Lamb -->
+              <circle  cx="505" cy="283" r="1.2"/><!-- Karragarra -->
+              <circle  cx="500" cy="267" r="1.7"/><!-- Coochiemudlo -->
+            </g>
+
+            <!-- Inner bay islets -->
+            <g fill="rgba(78,122,53,0.10)" stroke="rgba(141,189,90,0.3)" stroke-width="0.4">
+              <circle cx="513" cy="262" r="1.7"/><!-- Peel Island -->
+              <circle cx="501" cy="240" r="1.1"/><!-- St Helena Island -->
+              <circle cx="509" cy="250" r="0.9"/><!-- Mud Island -->
+            </g>
+
+            <!-- Small offshore rocks/islets -->
+            <circle cx="521" cy="392" r="1"   fill="rgba(141,189,90,0.4)"/><!-- Cook Island (off Fingal) -->
+            <circle cx="533" cy="428" r="0.9" fill="rgba(141,189,90,0.45)"/><!-- Julian Rocks (off Cape Byron) -->
+
+            <!-- Notable headlands / capes -->
+            <g fill="rgba(141,189,90,0.55)">
+              <circle cx="509" cy="50"  r="1.1"/><!-- Noosa Head -->
+              <circle cx="508" cy="114" r="1.1"/><!-- Pt Cartwright / Caloundra -->
+              <circle cx="535" cy="153" r="1.2"/><!-- Cape Moreton -->
+              <circle cx="534" cy="245" r="1.2"/><!-- Point Lookout -->
+              <circle cx="514" cy="376" r="1.2"/><!-- Point Danger (QLD/NSW border) -->
+              <circle cx="519" cy="389" r="1"  /><!-- Fingal Head -->
+              <circle cx="521" cy="454" r="1"  /><!-- Lennox Head -->
+            </g>
+            <circle cx="530" cy="433" r="1.6" fill="rgba(141,189,90,0.7)"/><!-- Cape Byron (easternmost) -->
+
+            <!-- ── Faint feature labels ── -->
+            <!-- (Coral Sea is labelled via the rotated geo-label overlay) -->
+            <text x="500" y="300" font-family="'Playfair Display', Georgia, serif"
+                  font-style="italic" font-size="9"
+                  fill="rgba(95,155,195,0.42)">Moreton Bay</text>
+            <g font-family="'DM Mono', monospace" font-size="6.5"
+               fill="rgba(141,189,90,0.34)" letter-spacing="0.4">
+              <text x="518" y="150">Bribie I.</text>
+              <text x="537" y="190">Moreton I.</text>
+              <text x="536" y="272">Nth Stradbroke</text>
+              <text x="522" y="356">Sth Stradbroke</text>
+            </g>
+            <g font-family="'DM Mono', monospace" font-size="6"
+               fill="rgba(95,155,195,0.42)" letter-spacing="0.3">
+              <text x="508" y="384">Tweed R.</text>
+              <text x="505" y="466">Richmond R.</text>
+              <text x="498" y="495">Clarence R.</text>
+            </g>
+            <text x="532" y="440" font-family="'DM Mono', monospace" font-size="7"
+                  fill="rgba(141,189,90,0.55)" letter-spacing="0.5">Cape Byron</text>
 
             <!-- NSW/QLD border (28°S, dashed horizontal — extends to coast) -->
             <line x1="0" y1="375" x2="512" y2="375"
@@ -1327,6 +1483,40 @@
                   stroke="rgba(212,185,106,0.16)" stroke-width="5" fill="none"
                   stroke-linecap="round"/>
 
+            <!-- Wollumbin (Mt Warning) erosion caldera — eroded Tweed shield volcano;
+                 rim = the McPherson / Tweed / Nightcap ranges around the Tweed Valley -->
+            <ellipse cx="505" cy="400" rx="13" ry="12"
+                     fill="none" stroke="rgba(212,185,106,0.13)" stroke-width="1"
+                     stroke-dasharray="3 5" transform="rotate(-8 505 400)"/>
+
+            <!-- Tamborine Mountain plateau (isolated highland between Scenic Rim & Gold Coast) -->
+            <ellipse cx="478" cy="330" rx="7" ry="9"
+                     fill="rgba(212,185,106,0.07)" stroke="rgba(212,185,106,0.13)"
+                     stroke-width="0.6" transform="rotate(-20 478 330)"/>
+
+            <!-- Toowoomba escarpment (steep eastern edge of the GDR above the Lockyer) -->
+            <path d="M 393 196 C 388 214, 384 234, 384 256 C 384 276, 388 296, 394 314"
+                  stroke="rgba(212,185,106,0.20)" stroke-width="1.1" fill="none"
+                  stroke-linecap="round"/>
+            <path d="M 390 210 l 6 -3 M 387 234 l 6 -3 M 386 258 l 6 -3
+                     M 387 282 l 6 -3 M 390 304 l 6 -3"
+                  stroke="rgba(212,185,106,0.22)" stroke-width="0.8" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Glass House Mountains (distinctive volcanic plugs, NW of Caloundra) -->
+            <g fill="rgba(212,185,106,0.5)" stroke="rgba(212,185,106,0.8)"
+               stroke-width="0.4" stroke-linejoin="round">
+              <path d="M 487 132 l -3 5 l 6 0 z"/>
+              <path d="M 492 138 l -2.4 4 l 4.8 0 z"/>
+              <path d="M 483 142 l -2.6 4.4 l 5.2 0 z"/>
+              <path d="M 490 147 l -2 3.4 l 4 0 z"/>
+              <path d="M 495 130 l -2.2 3.8 l 4.4 0 z"/>
+            </g>
+            <text x="470" y="120" font-family="'DM Mono', monospace" font-size="6"
+                  fill="rgba(212,185,106,0.42)" letter-spacing="0.3">Glass House Mtns</text>
+
+
+
             <!-- Topographic stippling in highland areas (subtle terrain texture) -->
             <g opacity="0.6" fill="rgba(212,185,106,0.35)">
               <!-- Northern GDR -->
@@ -1369,75 +1559,165 @@
               <circle cx="490" cy="372" r="0.6"/>
             </g>
 
-            <!-- Brisbane River (rises west of Ipswich, flows through Ipswich and Brisbane into Moreton Bay) -->
-            <path d="M 395 295 C 415 290, 430 282, 445 272 C 460 264, 470 252, 478 240 C 484 234, 490 232, 496 238"
-                  stroke="rgba(95,155,195,0.45)" stroke-width="1.4" fill="none"
+            <!-- ════════ WATERWAYS (researched river network) ════════ -->
+
+            <!-- Upper Brisbane River (headwaters in the N, flows S toward Somerset) -->
+            <path d="M 432 120 C 430 138, 427 156, 426 176
+                     C 425 190, 426 200, 428 208"
+                  stroke="rgba(95,155,195,0.30)" stroke-width="0.9" fill="none"
                   stroke-linecap="round"/>
 
-            <!-- Lockyer Creek (tributary of Brisbane River, flows east from foothills) -->
-            <path d="M 362 282 C 378 285, 392 290, 408 293"
-                  stroke="rgba(95,155,195,0.32)" stroke-width="0.9" fill="none"
+            <!-- Stanley River (rises near Maleny, flows SW to Somerset Dam) -->
+            <path d="M 462 150 C 455 162, 446 176, 438 190
+                     C 434 197, 431 202, 429 207"
+                  stroke="rgba(95,155,195,0.28)" stroke-width="0.8" fill="none"
                   stroke-linecap="round"/>
 
-            <!-- Stanley River → Lake Wivenhoe (Brisbane catchment headwater) -->
-            <path d="M 425 215 C 423 225, 421 238, 422 248"
-                  stroke="rgba(95,155,195,0.32)" stroke-width="0.9" fill="none"
+            <!-- Lake Somerset (reservoir on the Stanley River) -->
+            <ellipse cx="430" cy="208" rx="2.6" ry="6.5"
+                     fill="rgba(40,80,110,0.30)" stroke="rgba(95,155,195,0.5)"
+                     stroke-width="0.5" transform="rotate(-12 430 208)"/>
+
+            <!-- Stanley → Wivenhoe link -->
+            <path d="M 429 215 C 427 224, 424 232, 422 238"
+                  stroke="rgba(95,155,195,0.30)" stroke-width="0.8" fill="none"
                   stroke-linecap="round"/>
 
-            <!-- Lake Wivenhoe (reservoir on the Brisbane River) -->
-            <ellipse cx="421" cy="252" rx="3.2" ry="8.5"
-                     fill="rgba(40,80,110,0.3)" stroke="rgba(95,155,195,0.5)" stroke-width="0.6"
-                     transform="rotate(-15 421 252)"/>
+            <!-- Lake Wivenhoe (main Brisbane River reservoir) -->
+            <ellipse cx="421" cy="250" rx="3.3" ry="9"
+                     fill="rgba(40,80,110,0.32)" stroke="rgba(95,155,195,0.5)"
+                     stroke-width="0.6" transform="rotate(-14 421 250)"/>
 
-            <!-- Wivenhoe outflow to Brisbane River -->
-            <path d="M 423 261 C 425 270, 428 280, 430 285"
-                  stroke="rgba(95,155,195,0.35)" stroke-width="0.9" fill="none"
+            <!-- Brisbane River — Wivenhoe outflow E past Ipswich to the river mouth -->
+            <path d="M 423 259 C 426 270, 432 278, 442 282
+                     C 454 286, 462 280, 470 274
+                     C 480 266, 488 254, 493 244
+                     C 495 240, 496 238, 496 236"
+                  stroke="rgba(95,155,195,0.46)" stroke-width="1.4" fill="none"
                   stroke-linecap="round"/>
 
-            <!-- Logan River (south of Brisbane — rises in Scenic Rim, flows NE to Moreton Bay) -->
-            <path d="M 410 350 C 425 340, 445 325, 465 318 C 480 314, 490 318, 498 322"
-                  stroke="rgba(95,155,195,0.35)" stroke-width="1" fill="none"
+            <!-- Lockyer Creek (rises below Toowoomba, flows E to the Brisbane R.) -->
+            <path d="M 358 262 C 376 264, 396 268, 414 272
+                     C 422 274, 428 277, 433 280"
+                  stroke="rgba(95,155,195,0.30)" stroke-width="0.9" fill="none"
                   stroke-linecap="round"/>
 
-            <!-- Tweed River (NSW, just south of border — flows east to coast) -->
-            <path d="M 458 405 C 475 400, 490 393, 506 388"
-                  stroke="rgba(95,155,195,0.3)" stroke-width="0.9" fill="none"
+            <!-- Bremer River (rises near Cunningham's Gap, flows NE through Ipswich) -->
+            <path d="M 396 332 C 404 320, 415 308, 426 298
+                     C 434 291, 440 287, 446 284"
+                  stroke="rgba(95,155,195,0.30)" stroke-width="0.9" fill="none"
                   stroke-linecap="round"/>
 
-            <!-- Condamine River (rises on western slopes of GDR near Warwick, flows west toward Darling basin) -->
-            <path d="M 378 350 C 350 345, 310 335, 270 325 C 220 315, 160 308, 100 302"
+            <!-- Logan River (rises in the Scenic Rim, flows NE to southern Moreton Bay) -->
+            <path d="M 404 358 C 420 348, 440 334, 460 324
+                     C 474 318, 486 312, 494 304
+                     C 497 301, 498 300, 499 299"
+                  stroke="rgba(95,155,195,0.38)" stroke-width="1.05" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Albert River (tributary, joins the Logan from the S) -->
+            <path d="M 452 360 C 458 350, 463 340, 468 330
+                     C 471 324, 473 320, 475 317"
+                  stroke="rgba(95,155,195,0.28)" stroke-width="0.8" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Coomera & Nerang Rivers (short coastal streams to The Broadwater) -->
+            <path d="M 495 332 C 502 334, 507 337, 511 341"
+                  stroke="rgba(95,155,195,0.30)" stroke-width="0.8" fill="none"
+                  stroke-linecap="round"/>
+            <path d="M 492 352 C 499 352, 505 350, 510 347"
+                  stroke="rgba(95,155,195,0.28)" stroke-width="0.8" fill="none"
+                  stroke-linecap="round"/>
+            <!-- Hinze Dam (on the Nerang R.) -->
+            <ellipse cx="492" cy="354" rx="2" ry="3"
+                     fill="rgba(40,80,110,0.28)" stroke="rgba(95,155,195,0.45)"
+                     stroke-width="0.5"/>
+
+            <!-- Caboolture R. & Pine River (N coastal streams to Deception/Bramble Bay) -->
+            <path d="M 470 168 C 480 172, 488 178, 495 184"
+                  stroke="rgba(95,155,195,0.26)" stroke-width="0.75" fill="none"
+                  stroke-linecap="round"/>
+            <path d="M 468 196 C 478 200, 486 206, 493 212"
+                  stroke="rgba(95,155,195,0.26)" stroke-width="0.75" fill="none"
+                  stroke-linecap="round"/>
+            <!-- Lake Samsonvale (North Pine Dam) -->
+            <ellipse cx="462" cy="190" rx="2.4" ry="3.6"
+                     fill="rgba(40,80,110,0.26)" stroke="rgba(95,155,195,0.42)"
+                     stroke-width="0.5" transform="rotate(20 462 190)"/>
+
+            <!-- Tweed River (rises in the Wollumbin/Mt Warning caldera, mouth at Tweed Heads) -->
+            <path d="M 499 400 C 503 394, 507 389, 511 385
+                     C 513 383, 514 382, 514 381"
+                  stroke="rgba(95,155,195,0.34)" stroke-width="0.95" fill="none"
+                  stroke-linecap="round"/>
+            <!-- Tweed tributary (Rous / Oxley R. off the caldera) -->
+            <path d="M 488 408 C 492 404, 496 402, 500 400"
+                  stroke="rgba(95,155,195,0.24)" stroke-width="0.7" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Brunswick River (small coastal river, Brunswick Heads) -->
+            <path d="M 508 412 C 511 411, 513 410, 515 409"
+                  stroke="rgba(95,155,195,0.26)" stroke-width="0.75" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Richmond River (Casino–Coraki, mouth at Ballina) -->
+            <path d="M 452 470 C 470 466, 488 462, 502 462
+                     C 508 462, 512 463, 515 464"
+                  stroke="rgba(95,155,195,0.40)" stroke-width="1.1" fill="none"
+                  stroke-linecap="round"/>
+            <!-- Wilsons River (through Lismore, joins the Richmond at Coraki) -->
+            <path d="M 470 446 C 476 452, 482 458, 488 462"
+                  stroke="rgba(95,155,195,0.28)" stroke-width="0.8" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Evans River (small, Evans Head) -->
+            <path d="M 506 478 C 509 477, 511 477, 513 477"
+                  stroke="rgba(95,155,195,0.24)" stroke-width="0.7" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Clarence River (largest east-coast river; Grafton–Maclean, mouth at Yamba) -->
+            <path d="M 446 496 C 466 494, 486 492, 500 491
+                     C 506 491, 509 491, 511 492"
+                  stroke="rgba(95,155,195,0.40)" stroke-width="1.15" fill="none"
+                  stroke-linecap="round"/>
+
+            <!-- Condamine River (rises on the W slopes near Warwick, flows W to the Darling basin) -->
+            <path d="M 378 350 C 350 345, 310 335, 270 325
+                     C 220 315, 160 308, 100 302"
                   stroke="rgba(95,155,195,0.35)" stroke-width="1.1" fill="none"
                   stroke-linecap="round"/>
 
-            <!-- Severn River (south of Stanthorpe, flows SW toward MacIntyre/Darling) -->
-            <path d="M 360 405 C 340 400, 315 395, 285 392 C 250 388, 215 388, 175 390"
+            <!-- Severn River (S of Stanthorpe, flows SW toward the MacIntyre/Darling) -->
+            <path d="M 360 405 C 340 400, 315 395, 285 392
+                     C 250 388, 215 388, 175 390"
                   stroke="rgba(95,155,195,0.28)" stroke-width="0.9" fill="none"
                   stroke-linecap="round"/>
 
+            <!-- Mary River (rises near Maleny, flows N toward Gympie — leaves map north) -->
+            <path d="M 470 150 C 468 130, 467 108, 468 86
+                     C 469 66, 472 46, 476 28"
+                  stroke="rgba(95,155,195,0.24)" stroke-width="0.8" fill="none"
+                  stroke-linecap="round" stroke-dasharray="5 4"/>
+
             <!-- Mountain peak markers at notable summits (small triangles) -->
-            <g fill="rgba(212,185,106,0.55)" stroke="rgba(212,185,106,0.85)" stroke-width="0.5" stroke-linejoin="round">
-              <!-- Mt Mitchell / Cunningham's Gap (Main Range) -->
-              <path d="M 392 268 l -3 4 l 6 0 z"/>
+            <g fill="rgba(212,185,106,0.6)" stroke="rgba(212,185,106,0.9)" stroke-width="0.5" stroke-linejoin="round">
+              <!-- Cunningham's Gap / Mt Mitchell (Main Range, GDR) -->
+              <path d="M 390 270 l -3 4.2 l 6 0 z"/>
+              <!-- Mt Superbus (highest in SEQ, Main Range S of the Gap) -->
+              <path d="M 387 300 l -3.2 4.4 l 6.4 0 z"/>
               <!-- Mt Glorious (D'Aguilar Range) -->
-              <path d="M 432 195 l -3 4 l 6 0 z"/>
+              <path d="M 438 205 l -3 4 l 6 0 z"/>
               <!-- Mt Barney (Scenic Rim) -->
-              <path d="M 410 346 l -3.2 4.2 l 6.4 0 z"/>
-              <!-- Mt Lindesay (border, McPherson Range) -->
-              <path d="M 432 364 l -3 4 l 6 0 z"/>
-              <!-- Springbrook / Mt Warning area (border, near coast) -->
-              <path d="M 488 376 l -3 4 l 6 0 z"/>
-              <!-- Mt Superbus (highest in SEQ, Main Range south of Cunningham's Gap) -->
-              <path d="M 388 305 l -3 4 l 6 0 z"/>
+              <path d="M 408 350 l -3.2 4.4 l 6.4 0 z"/>
+              <!-- Mt Lindesay (QLD/NSW border, McPherson Range) -->
+              <path d="M 430 366 l -3 4 l 6 0 z"/>
             </g>
+            <!-- Wollumbin / Mt Warning (central plug of the Tweed caldera) -->
+            <path d="M 505 400 l -3.4 4.8 l 6.8 0 z"
+                  fill="rgba(212,185,106,0.7)" stroke="rgba(212,185,106,0.95)"
+                  stroke-width="0.5" stroke-linejoin="round"/>
 
-            <!-- South Stradbroke Island (between North Stradbroke and Gold Coast) -->
-            <path d="M 513 332 Q 517 345 514 358 Q 510 362 508 352 Q 506 340 513 332 Z"
-                  stroke="rgba(141,189,90,0.35)" stroke-width="0.9" fill="rgba(78,122,53,0.06)"/>
-
-            <!-- Coastal headland — Point Lookout (North Stradbroke northern tip) -->
-            <circle cx="522" cy="285" r="1.2" fill="rgba(141,189,90,0.5)"/>
-            <!-- Cape Moreton (Moreton Island northern tip) -->
-            <circle cx="516" cy="212" r="1.2" fill="rgba(141,189,90,0.5)"/>
+            <!-- (duplicate island/headland block removed — see researched coastline layer above) -->
 
             <!-- Coverage radius around Southern Downs (active region halo) -->
             <circle cx="305" cy="335" r="55"
