@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- paddock-route build 20260518-1 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -1719,6 +1718,75 @@
                   stroke-width="0.5" stroke-linejoin="round"/>
 
             <!-- (duplicate island/headland block removed — see researched coastline layer above) -->
+
+            <!-- ════════ MAJOR HIGHWAYS & MOTORWAYS (researched routes) ════════
+                 New England Hwy (Granite Belt spine) · Cunningham Hwy (Southern
+                 Downs → Brisbane) · Warrego Hwy (Toowoomba–Lockyer–Ipswich) ·
+                 Pacific Mwy/Hwy (Brisbane–Gold Coast–Tweed–Ballina–Yamba) ·
+                 Bruce Hwy (Brisbane–Sunshine Coast–Gympie) · Mt Lindesay Hwy ·
+                 Bruxner Hwy · Summerland Way · Brisbane Valley Hwy · Logan Mwy
+                 Rendered with a soft-light blend so they read as painted onto
+                 the terrain rather than as a bright overlay. -->
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+              <!-- Pass 1 — faint earthy base (normal blend) keeps roads legible
+                   on the darkest terrain without standing out -->
+              <g stroke="rgba(206,188,148,0.15)">
+                <g stroke-width="1.5">
+                  <path d="M 276 450 C 284 432, 290 418, 293 406 C 296 396, 299 388, 300 381 C 302 366, 304 350, 305 335 C 305 329, 305 323, 304 318 C 302 290, 301 260, 300 230 C 300 210, 300 188, 300 168"/>
+                  <path d="M 304 318 C 320 314, 350 308, 388 300 C 400 297, 408 294, 416 291 C 428 287, 440 282, 450 278 C 461 267, 471 254, 478 242"/>
+                  <path d="M 478 242 C 484 270, 492 304, 500 332 C 503 348, 506 363, 508 378 C 509 405, 510 435, 509 461 C 508 474, 506 484, 504 491"/>
+                  <path d="M 478 242 C 476 220, 472 198, 470 178 C 472 158, 481 142, 490 128 C 486 104, 480 80, 476 56 C 475 44, 474 36, 474 30"/>
+                </g>
+                <g stroke-width="0.95">
+                  <path d="M 300 230 C 326 240, 362 252, 398 262 C 416 267, 434 273, 450 278"/>
+                  <path d="M 478 242 C 472 268, 465 294, 458 318 C 454 330, 450 342, 446 352"/>
+                  <path d="M 276 450 C 330 459, 400 463, 458 462 C 466 460, 473 456, 480 452 C 490 454, 500 458, 508 461"/>
+                  <path d="M 456 495 C 458 484, 458 472, 458 462 C 454 453, 451 446, 448 438 C 445 428, 442 418, 440 408"/>
+                  <path d="M 450 278 C 444 257, 436 234, 428 212 C 426 198, 425 184, 424 170"/>
+                  <path d="M 450 278 C 466 290, 484 307, 500 332"/>
+                </g>
+              </g>
+
+              <!-- Pass 2 — soft-light highlight so the line tints into the
+                   terrain shading (the "painted on the land" effect) -->
+              <g style="mix-blend-mode:soft-light">
+                <g stroke="rgba(255,249,231,0.5)" stroke-width="1.4">
+                  <path d="M 276 450 C 284 432, 290 418, 293 406 C 296 396, 299 388, 300 381 C 302 366, 304 350, 305 335 C 305 329, 305 323, 304 318 C 302 290, 301 260, 300 230 C 300 210, 300 188, 300 168"/>
+                  <path d="M 304 318 C 320 314, 350 308, 388 300 C 400 297, 408 294, 416 291 C 428 287, 440 282, 450 278 C 461 267, 471 254, 478 242"/>
+                  <path d="M 478 242 C 484 270, 492 304, 500 332 C 503 348, 506 363, 508 378 C 509 405, 510 435, 509 461 C 508 474, 506 484, 504 491"/>
+                  <path d="M 478 242 C 476 220, 472 198, 470 178 C 472 158, 481 142, 490 128 C 486 104, 480 80, 476 56 C 475 44, 474 36, 474 30"/>
+                </g>
+                <g stroke="rgba(255,249,231,0.34)" stroke-width="0.9">
+                  <path d="M 300 230 C 326 240, 362 252, 398 262 C 416 267, 434 273, 450 278"/>
+                  <path d="M 478 242 C 472 268, 465 294, 458 318 C 454 330, 450 342, 446 352"/>
+                  <path d="M 276 450 C 330 459, 400 463, 458 462 C 466 460, 473 456, 480 452 C 490 454, 500 458, 508 461"/>
+                  <path d="M 456 495 C 458 484, 458 472, 458 462 C 454 453, 451 446, 448 438 C 445 428, 442 418, 440 408"/>
+                  <path d="M 450 278 C 444 257, 436 234, 428 212 C 426 198, 425 184, 424 170"/>
+                  <path d="M 450 278 C 466 290, 484 307, 500 332"/>
+                </g>
+              </g>
+
+              <!-- Highway-junction towns (quiet) -->
+              <g fill="rgba(214,196,156,0.4)" stroke="none">
+                <circle cx="450" cy="278" r="1"/><!-- Ipswich -->
+                <circle cx="398" cy="262" r="0.85"/><!-- Gatton -->
+                <circle cx="428" cy="212" r="0.85"/><!-- Esk -->
+                <circle cx="470" cy="178" r="0.85"/><!-- Caboolture -->
+                <circle cx="458" cy="462" r="0.85"/><!-- Casino -->
+                <circle cx="480" cy="452" r="0.85"/><!-- Lismore -->
+              </g>
+            </g>
+            <!-- Highway labels (whisper-weight) -->
+            <g font-family="'DM Mono', monospace" font-size="5.6"
+               fill="rgba(214,196,156,0.4)" letter-spacing="0.35">
+              <text x="288" y="398" transform="rotate(-77 288 398)">New England Hwy</text>
+              <text x="350" y="298" transform="rotate(-16 350 298)">Cunningham Hwy</text>
+              <text x="352" y="246" transform="rotate(11 352 246)">Warrego Hwy</text>
+              <text x="503" y="362" transform="rotate(-85 503 362)">Pacific Mwy</text>
+              <text x="471" y="100" transform="rotate(-83 471 100)">Bruce Hwy</text>
+            </g>
+
 
             <!-- Coverage radius around Southern Downs (active region halo) -->
             <circle cx="305" cy="335" r="55"
